@@ -39,7 +39,7 @@ namespace StockSharp.Studio.Controls
 	[DisplayName("Level2")]
 	[DescriptionLoc(LocalizedStrings.Str3236Key)]
 	[Icon("images/level2_16x16.png")]
-	public partial class Level2Panel : IStudioControl
+	public partial class Level2Panel
 	{
 		private readonly HashSet<string> _askDefaultColumns = new HashSet<string> { "Board", "BestAsk.Price", "BestAsk.Volume" };
 		private readonly HashSet<string> _bidDefaultColumns = new HashSet<string> { "Board", "BestBid.Price", "BestBid.Volume" };
@@ -119,7 +119,7 @@ namespace StockSharp.Studio.Controls
 			Settings.Security = ((SecurityGrid)sender).SelectedSecurity;
 		}
 
-		void IPersistable.Load(SettingsStorage storage)
+		public override void Load(SettingsStorage storage)
 		{
 			var securityId = storage.GetValue<string>("SecurityId");
 			if (securityId != null)
@@ -138,7 +138,7 @@ namespace StockSharp.Studio.Controls
 				BuySellPanel.Load(buySellSettings);
 		}
 
-		void IPersistable.Save(SettingsStorage storage)
+		public override void Save(SettingsStorage storage)
 		{
 			storage.SetValue("SecurityId", SecurityPicker.SelectedSecurity?.Id);
 
@@ -147,13 +147,5 @@ namespace StockSharp.Studio.Controls
 
 			storage.SetValue("BuySellSettings", BuySellPanel.Save());
 		}
-
-		void IDisposable.Dispose()
-		{
-		}
-
-		string IStudioControl.Title => "Level2";
-
-		Uri IStudioControl.Icon => null;
 	}
 }

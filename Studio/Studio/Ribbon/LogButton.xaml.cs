@@ -131,5 +131,7 @@ namespace StockSharp.Studio.Ribbon
 		string IStudioControl.Title => null;
 
 		Uri IStudioControl.Icon => null;
+
+		public string Key { get; set; }
 	}
 }

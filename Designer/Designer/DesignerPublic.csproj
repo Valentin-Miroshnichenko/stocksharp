@@ -143,8 +143,12 @@
     <Compile Include="..\..\StockSharpAssemblyInfo.cs">
       <Link>Properties\StockSharpAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="AppConfig.cs" />
     <Compile Include="Commands\SetDefaultEmulationSettingsCommand.cs" />
     <Compile Include="CompositionItem.cs" />
+    <Compile Include="Configuration\ControlElement.cs" />
+    <Compile Include="Configuration\ControlElementCollection.cs" />
+    <Compile Include="Configuration\DesignerSection.cs" />
     <Compile Include="DiagramDebuggerControl.xaml.cs">
       <DependentUpon>DiagramDebuggerControl.xaml</DependentUpon>
     </Compile>
@@ -157,6 +161,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="StrategyControlsGallery.xaml.cs">
+      <DependentUpon>StrategyControlsGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="TitleConverter.cs" />
     <Compile Include="StrategyControl.xaml.cs">
@@ -195,6 +202,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="SolutionExplorerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StrategyControlsGallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

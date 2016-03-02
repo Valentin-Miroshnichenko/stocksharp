@@ -33,7 +33,8 @@ namespace StockSharp.Studio.Controls
 	using StockSharp.Xaml.Diagram;
 	using StockSharp.Localization;
 
-	public partial class DiagramPanel : IStudioControl, IStudioCommandScope
+	[DisplayNameLoc(LocalizedStrings.Str3181Key)]
+	public partial class DiagramPanel : IStudioCommandScope
     {
 		private readonly Timer _timer;
 		private bool _needToSave;
@@ -163,7 +164,7 @@ namespace StockSharp.Studio.Controls
 		}
 
 		//TODO: дописать логику загрузки состояния для DockSite
-		void IPersistable.Load(SettingsStorage storage)
+		public override void Load(SettingsStorage storage)
 		{
 			var diagramEditor = storage.GetValue<SettingsStorage>("DiagramEditor");
 			if (diagramEditor != null)
@@ -176,13 +177,13 @@ namespace StockSharp.Studio.Controls
 		}
 
 		//TODO: дописать логику сохранения состояния для DockSite
-		void IPersistable.Save(SettingsStorage storage)
+		public override void Save(SettingsStorage storage)
 		{
 			storage.SetValue("DiagramEditor", DiagramEditor.Save());
 			//storage.SetValue("Layout", DockSite.SaveLayout(true));
 		}
 
-		void IDisposable.Dispose()
+		public override void Dispose()
 		{
 			Palette.PaletteElements = null;
 
@@ -191,11 +192,9 @@ namespace StockSharp.Studio.Controls
 
 			if (_needToSave)
 				Save();
+
+			base.Dispose();
 		}
-
-		string IStudioControl.Title => LocalizedStrings.Str3181;
-
-		Uri IStudioControl.Icon => null;
 
 		public CompositionDiagramElement GetSelectionCopyElement()
 		{

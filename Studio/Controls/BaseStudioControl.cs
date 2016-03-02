@@ -29,6 +29,7 @@ namespace StockSharp.Studio.Controls
 	using Ecng.Xaml;
 
 	using StockSharp.Studio.Core;
+	using StockSharp.Studio.Core.Commands;
 
 	public abstract class BaseStudioControl : UserControl, IStudioControl, INotifyPropertyChanged
 	{
@@ -53,9 +54,6 @@ namespace StockSharp.Studio.Controls
 		}
 
 		public virtual string Key {get; set;} = $"_{Guid.NewGuid().ToString("N")}";
-
-		// TODO change to ControlChangedCommand
-		public event Action<BaseStudioControl> Changed;
 
 		protected BaseStudioControl()
 		{
@@ -104,9 +102,9 @@ namespace StockSharp.Studio.Controls
 		{
 		}
 
-		protected void RaiseChanged()
+		protected void RaiseChangedCommand()
 		{
-			Changed.SafeInvoke(this);
+			new ControlChangedCommand(this).Process(this);
 		}
 
 		#region INotifyPropertyChanged

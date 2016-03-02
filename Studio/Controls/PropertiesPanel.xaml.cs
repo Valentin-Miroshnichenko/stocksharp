@@ -27,7 +27,7 @@ namespace StockSharp.Studio.Controls
 
 	[DisplayNameLoc(LocalizedStrings.Str1507Key)]
 	[DescriptionLoc(LocalizedStrings.Str3270Key)]
-	public partial class PropertiesPanel : IStudioControl
+	public partial class PropertiesPanel
 	{
 		public PropertiesPanel()
 		{
@@ -68,22 +68,10 @@ namespace StockSharp.Studio.Controls
 			});
 		}
 
-		void IPersistable.Save(SettingsStorage settings)
-		{
-		}
-
-		void IPersistable.Load(SettingsStorage settings)
-		{
-		}
-
-		void IDisposable.Dispose()
+		public override void Dispose()
 		{
 			var service = ConfigManager.GetService<IStudioCommandService>();
 			service.UnRegister<SelectCommand>(this);
 		}
-
-		string IStudioControl.Title => LocalizedStrings.Str1507;
-
-		Uri IStudioControl.Icon => null;
 	}
 }

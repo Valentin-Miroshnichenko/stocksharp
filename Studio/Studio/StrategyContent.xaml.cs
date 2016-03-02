@@ -561,6 +561,8 @@ namespace StockSharp.Studio
 
 		Uri IStudioControl.Icon => null;
 
+		public string Key { get; set; }
+
 		void IPersistable.Load(SettingsStorage settings)
 		{
 			_suspendChangedEvent = true;

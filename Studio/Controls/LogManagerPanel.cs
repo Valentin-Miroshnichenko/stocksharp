@@ -28,8 +28,9 @@ namespace StockSharp.Studio.Controls
 	using StockSharp.Xaml;
 	using StockSharp.Localization;
 
+	[DisplayNameLoc(LocalizedStrings.Str3237Key)]
 	[Guid("F97DCB8B-2104-4DF3-B6C5-CBB2B8B3B704")]
-	public class LogManagerPanel : UserControl, IStudioControl
+	public class LogManagerPanel : BaseStudioControl
 	{
 		private readonly Monitor _monitor = new Monitor();
 		private readonly GuiLogListener _listener;
@@ -51,21 +52,17 @@ namespace StockSharp.Studio.Controls
 		//	new AddLogListenerCommand(_listener).Process(this);
 		//}
 
-		void IPersistable.Load(SettingsStorage storage)
+		public override void Load(SettingsStorage storage)
 		{
 			_monitor.Load(storage);
 		}
 
-		void IPersistable.Save(SettingsStorage storage)
+		public override void Save(SettingsStorage storage)
 		{
 			_monitor.Save(storage);
 		}
 
-		string IStudioControl.Title => LocalizedStrings.Str3237;
-
-		Uri IStudioControl.Icon => null;
-
-		void IDisposable.Dispose()
+		public override void Dispose()
 		{
 			new RemoveLogListenerCommand(_listener).Process(this);
 		}

@@ -26,38 +26,38 @@
                     <dxdo:LayoutGroup Orientation="Horizontal" ItemHeight="3*">
                         
 						<dxdo:LayoutGroup DestroyOnClosingChildren="False" ItemWidth="*">
-                            <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
+                            <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="True">
                                 <dxdo:LayoutGroup >
-                                    <dxdo:DocumentGroup DestroyOnClosingChildren="False" >
-                                        <dxdo:DocumentPanel x:Name="DiagramDebuggerPanel" Caption="{x:Static localization:LocalizedStrings.Strategy}" AllowClose="False">
+                                    <dxdo:DocumentGroup DestroyOnClosingChildren="True" >
+                                        <dxdo:DocumentPanel x:Name="DiagramDebuggerPanel" Caption="{x:Static localization:LocalizedStrings.Strategy}">
                                             <designer:DiagramDebuggerControl x:Name="DiagramDebuggerControl" Changed="OnDiagramDebuggerControlChanged"/>
                                         </dxdo:DocumentPanel>
                                     </dxdo:DocumentGroup>
                                 </dxdo:LayoutGroup>
                             </dxdo:LayoutGroup>
                         </dxdo:LayoutGroup>
-						
-                        <dxdo:LayoutGroup DestroyOnClosingChildren="False" ItemWidth="*">
-                            <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
+
+                        <dxdo:LayoutGroup DestroyOnClosingChildren="True" ItemWidth="*">
+                            <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="True">
                                 <dxdo:LayoutGroup >
-                                    <dxdo:DocumentGroup DestroyOnClosingChildren="False" >
-                                        <dxdo:DocumentPanel x:Name="ChartPanel" Caption="{x:Static localization:LocalizedStrings.Str3200}" AllowClose="False">
-                                            <xaml:Chart x:Name="Chart" />
+                                    <dxdo:DocumentGroup DestroyOnClosingChildren="True" >
+                                        <dxdo:DocumentPanel x:Name="ChartPanel" Caption="{x:Static localization:LocalizedStrings.Str3200}">
+                                            <controls:CandleChartPanel />
                                         </dxdo:DocumentPanel>
-                                        <dxdo:DocumentPanel x:Name="OrderGridPanel" Caption="{x:Static localization:LocalizedStrings.Orders}" AllowClose="False">
-                                            <xaml:OrderGrid x:Name="OrderGrid"/>
+                                        <dxdo:DocumentPanel x:Name="OrderGridPanel" Caption="{x:Static localization:LocalizedStrings.Orders}">
+                                            <controls:OrdersPanel />
                                         </dxdo:DocumentPanel>
-                                        <dxdo:DocumentPanel x:Name="MyTradeGridPanel" Caption="{x:Static localization:LocalizedStrings.Str985}" AllowClose="False">
-                                            <xaml:MyTradeGrid x:Name="MyTradeGrid"/>
+                                        <dxdo:DocumentPanel x:Name="MyTradeGridPanel" Caption="{x:Static localization:LocalizedStrings.Str985}">
+                                            <controls:MyTradesTable />
                                         </dxdo:DocumentPanel>
-                                        <dxdo:DocumentPanel x:Name="PositionCurvePanel" Caption="{x:Static localization:LocalizedStrings.Str862}" AllowClose="False">
-                                            <xaml:EquityCurveChart x:Name="PositionCurve" />
+                                        <dxdo:DocumentPanel x:Name="PositionCurvePanel" Caption="{x:Static localization:LocalizedStrings.Str862}">
+                                            <controls:PositionChartPanel />
                                         </dxdo:DocumentPanel>
-                                        <dxdo:DocumentPanel x:Name="EquityCurvePanel" Caption="{x:Static localization:LocalizedStrings.Equity}" AllowClose="False">
-                                            <xaml:EquityCurveChart x:Name="EquityCurve" />
+                                        <dxdo:DocumentPanel x:Name="EquityCurvePanel" Caption="{x:Static localization:LocalizedStrings.Equity}">
+                                            <controls:EquityCurveChartPanel />
                                         </dxdo:DocumentPanel>
-                                        <dxdo:DocumentPanel x:Name="StatisticsGridPanel" Caption="{x:Static localization:LocalizedStrings.Str436}" AllowClose="False">
-                                            <xaml:StatisticParameterGrid x:Name="StatisticsGrid" />
+                                        <dxdo:DocumentPanel x:Name="StatisticsGridPanel" Caption="{x:Static localization:LocalizedStrings.Str436}">
+                                            <controls:StatisticsPanel />
                                         </dxdo:DocumentPanel>
                                     </dxdo:DocumentGroup>
                                 </dxdo:LayoutGroup>

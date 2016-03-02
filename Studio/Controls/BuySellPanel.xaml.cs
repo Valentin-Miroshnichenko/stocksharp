@@ -191,7 +191,7 @@ namespace StockSharp.Studio.Controls
 		}
 	}
 
-	public partial class BuySellPanel : IStudioControl
+	public partial class BuySellPanel
 	{
 		private readonly BuySellSettings _settings = new BuySellSettings();
 
@@ -265,22 +265,14 @@ namespace StockSharp.Studio.Controls
 			new CancelAllOrdersCommand().Process(this);
 		}
 
-		public void Save(SettingsStorage storage)
+		public override void Save(SettingsStorage storage)
 		{
 			_settings.Save(storage);
 		}
 
-		public void Load(SettingsStorage storage)
+		public override void Load(SettingsStorage storage)
 		{
 			_settings.Load(storage);
 		}
-
-		void IDisposable.Dispose()
-		{
-		}
-
-		string IStudioControl.Title => string.Empty;
-
-		Uri IStudioControl.Icon => null;
 	}
 }

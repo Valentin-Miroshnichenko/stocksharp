@@ -17,6 +17,7 @@ namespace StockSharp.Studio.Core.Commands
 {
 	using System;
 
+	using StockSharp.Algo.Strategies;
 	using StockSharp.BusinessEntities;
 
 	public class BindCommand<T> : BaseStudioCommand
@@ -24,7 +25,7 @@ namespace StockSharp.Studio.Core.Commands
 	{
 		public T Source { get; private set; }
 
-		public IStudioControl Control { get; private set; }
+		public IStudioControl Control { get; }
 
 		public BindCommand(T source, IStudioControl control = null)
 		{
@@ -42,9 +43,9 @@ namespace StockSharp.Studio.Core.Commands
 		}
 	}
 
-	public class BindStrategyCommand : BindCommand<StrategyContainer>
+	public class BindStrategyCommand : BindCommand<Strategy>
 	{
-		public BindStrategyCommand(StrategyContainer source, IStudioControl control = null)
+		public BindStrategyCommand(Strategy source, IStudioControl control = null)
 			: base(source, control)
 		{
 		}

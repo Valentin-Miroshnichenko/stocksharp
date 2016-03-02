@@ -26,6 +26,7 @@ namespace StockSharp.Designer.Layout
 	using DevExpress.Xpf.Core.Serialization;
 	using DevExpress.Xpf.Docking;
 	using DevExpress.Xpf.Docking.Base;
+	using DevExpress.Xpf.Layout.Core;
 
 	using Ecng.Collections;
 	using Ecng.Common;
@@ -35,16 +36,16 @@ namespace StockSharp.Designer.Layout
 	using StockSharp.Localization;
 	using StockSharp.Logging;
 	using StockSharp.Studio.Controls;
+	using StockSharp.Studio.Core;
 
 	public sealed class LayoutManager : BaseLogReceiver
 	{
 		private readonly DocumentGroup _documentGroup;
-		private readonly Dictionary<string, DocumentPanel> _documents = new Dictionary<string, DocumentPanel>();
-		//private readonly Dictionary<string, LayoutAnchorable> _anchorables = new Dictionary<string, LayoutAnchorable>();
-		private readonly List<BaseStudioControl> _controls = new List<BaseStudioControl>();
+		private readonly Dictionary<string, LayoutPanel> _panels = new Dictionary<string, LayoutPanel>();
+		private readonly List<IStudioControl> _controls = new List<IStudioControl>();
 
-		private readonly SynchronizedDictionary<BaseStudioControl, SettingsStorage> _dockingControlSettings = new SynchronizedDictionary<BaseStudioControl, SettingsStorage>();
-		private readonly SynchronizedSet<BaseStudioControl> _changedControls = new CachedSynchronizedSet<BaseStudioControl>();
+		private readonly SynchronizedDictionary<IStudioControl, SettingsStorage> _dockingControlSettings = new SynchronizedDictionary<IStudioControl, SettingsStorage>();
+		private readonly SynchronizedSet<IStudioControl> _changedControls = new CachedSynchronizedSet<IStudioControl>();
 
 		private readonly TimeSpan _period = TimeSpan.FromSeconds(5);
 		private readonly object _syncRoot = new object();
@@ -58,7 +59,7 @@ namespace StockSharp.Designer.Layout
 
 		public DockLayoutManager DockingManager { get; }
 
-		public IEnumerable<BaseStudioControl> DockingControls => _controls.ToArray();
+		public IEnumerable<IStudioControl> DockingControls => _controls.ToArray();
 
 		public event Action Changed; 
 
@@ -87,46 +88,40 @@ namespace StockSharp.Designer.Layout
 			DockingManager.LayoutItemSizeChanged += DockingManager_LayoutItemSizeChanged;
 		}
 
-		//public void OpenToolWindow(BaseStudioControl content, bool canClose = true)
-		//{
-		//	if (content == null)
-		//		throw new ArgumentNullException(nameof(content));
-
-		//	var anchorable = _anchorables.TryGetValue(content.Key);
-
-		//	if (anchorable == null)
-		//	{
-		//		content.Changed += OnBaseStudioControlChanged;
-
-		//		anchorable = new LayoutAnchorable
-		//		{
-		//			ContentId = content.Key,
-		//			Content = content,
-		//			CanClose = canClose
-		//		};
-
-		//		anchorable.SetBindings(LayoutContent.TitleProperty, content, "Title");
-
-		//		_anchorables.Add(content.Key, anchorable);
-
-		//		//RootGroup.Children.Add(new LayoutAnchorablePane(anchorable));
-		//		OnBaseStudioControlChanged(content);
-		//	}
-
-		//	//DockingManager.ActiveContent = anchorable.Content;
-		//}
-
-		public void OpenDocumentWindow(BaseStudioControl content, bool canClose = true)
+		public void OpenToolWindow(IStudioControl content, bool canClose = true)
 		{
 			if (content == null)
 				throw new ArgumentNullException(nameof(content));
 
-			var document = _documents.TryGetValue(content.Key);
+			var panel = _panels.TryGetValue(content.Key);
+
+			if (panel == null)
+			{
+				panel = DockingManager.DockController.AddPanel(DockType.Left);
+				panel.Name = "_" + content.Key.Replace("-", "_");
+				panel.Content = content;
+				panel.ShowCloseButton = canClose;
+
+				panel.SetBindings(BaseLayoutItem.CaptionProperty, content, "Title");
+
+				_panels.Add(content.Key, panel);
+				_controls.Add(content);
+
+				FlushSettings(content);
+			}
+
+			DockingManager.ActiveLayoutItem = panel;
+		}
+
+		public void OpenDocumentWindow(IStudioControl content, bool canClose = true)
+		{
+			if (content == null)
+				throw new ArgumentNullException(nameof(content));
+
+			var document = _panels.TryGetValue(content.Key);
 
 			if (document == null)
 			{
-				content.Changed += OnBaseStudioControlChanged;
-
 				document = DockingManager.DockController.AddDocumentPanel(_documentGroup);
 				document.Name = "_" + content.Key.Replace("-", "_");
 				document.Content = content;
@@ -134,26 +129,26 @@ namespace StockSharp.Designer.Layout
 
 				document.SetBindings(BaseLayoutItem.CaptionProperty, content, "Title");
 
-				_documents.Add(content.Key, document);
+				_panels.Add(content.Key, document);
 				_controls.Add(content);
 
-				OnBaseStudioControlChanged(content);
+				FlushSettings(content);
 			}
 
 			DockingManager.ActiveLayoutItem = document;
 		}
 
-		public void CloseDocumentWindow(BaseStudioControl content)
+		public void CloseWindow(IStudioControl content)
 		{
 			if (content == null)
 				throw new ArgumentNullException(nameof(content));
 
-			var document = _documents.TryGetValue(content.Key);
+			var panel = _panels.TryGetValue(content.Key);
 
-			if (document == null)
+			if (panel == null)
 				return;
 
-			DockingManager.DockController.Close(document);
+			DockingManager.DockController.Close(panel);
 		}
 
 		public override void Load(SettingsStorage storage)
@@ -161,8 +156,7 @@ namespace StockSharp.Designer.Layout
 			if (storage == null)
 				throw new ArgumentNullException(nameof(storage));
 
-			_documents.Clear();
-			//_anchorables.Clear();
+			_panels.Clear();
 			_changedControls.Clear();
 			_dockingControlSettings.Clear();
 
@@ -173,9 +167,14 @@ namespace StockSharp.Designer.Layout
 				try
 				{
 					var control = LoadBaseStudioControl(settings);
+					var isToolWindow = settings.GetValue("IsToolWindow", true);
 
 					_dockingControlSettings.Add(control, settings);
-					OpenDocumentWindow(control);
+
+					if (isToolWindow)
+						OpenToolWindow(control);
+					else
+						OpenDocumentWindow(control);
 				}
 				catch (Exception excp)
 				{
@@ -223,7 +222,9 @@ namespace StockSharp.Designer.Layout
 
 				foreach (var content in items)
 				{
-					content.DoIf<LayoutPanel, DocumentPanel>(d => _documents[d.Name] = d);
+					_panels[content.Name] = content;
+
+                    //content.DoIf<LayoutPanel, DocumentPanel>(d => _panels[d.Name] = d);
 					//content.DoIf<ContentItem, DocumentPanel>(d => _anchorables[d.ContentId] = d);
 
 					if (!(content.Content is BaseStudioControl))
@@ -269,6 +270,12 @@ namespace StockSharp.Designer.Layout
 			Flush();
 		}
 
+		public void FlushSettings(IStudioControl control)
+		{
+			_changedControls.Add(control);
+			Flush();
+		}
+
 		protected override void DisposeManaged()
 		{
 			_isDisposing = true;
@@ -281,7 +288,7 @@ namespace StockSharp.Designer.Layout
 
 		private void OnDockingManagerDockItemClosing(object sender, ItemCancelEventArgs e)
 		{
-			var control = ((DocumentPanel)e.Item).Content as BaseStudioControl;
+			var control = ((LayoutPanel)e.Item).Content as BaseStudioControl;
 
 			if (control == null)
 				return;
@@ -291,13 +298,13 @@ namespace StockSharp.Designer.Layout
 
 		private void OnDockingManagerDockItemClosed(object sender, DockItemClosedEventArgs e)
 		{
-			var panel = (DocumentPanel)e.Item;
+			var panel = (LayoutPanel)e.Item;
             var control = panel.Content as BaseStudioControl;
 
 			if (control == null)
 				return;
 
-			_documents.RemoveWhere(p => Equals(p.Value, panel));
+			_panels.RemoveWhere(p => Equals(p.Value, panel));
 			_controls.Remove(control);
 
 			_isLayoutChanged = true;
@@ -344,12 +351,6 @@ namespace StockSharp.Designer.Layout
 			Flush();
 		}
 
-		private void OnBaseStudioControlChanged(BaseStudioControl control)
-		{
-			_changedControls.Add(control);
-			Flush();
-		}
-
 		private void Flush()
 		{
 			lock (_syncRoot)
@@ -363,7 +364,7 @@ namespace StockSharp.Designer.Layout
 
 		private void OnFlush(object state)
 		{
-			BaseStudioControl[] items;
+			IStudioControl[] items;
 			bool isLayoutChanged;
 			bool isSettingsChanged;
 
@@ -423,14 +424,17 @@ namespace StockSharp.Designer.Layout
 			}
 		}
 
-		private void Save(IEnumerable<BaseStudioControl> items, bool isLayoutChanged)
+		private void Save(IEnumerable<IStudioControl> items, bool isLayoutChanged)
 		{
 			CultureInfo.InvariantCulture.DoInCulture(() =>
 			{
 				foreach (var control in items)
 				{
+					var isDocumentPanel = _panels.TryGetValue(control.Key) is DocumentPanel;
+
 					var storage = new SettingsStorage();
 					storage.SetValue("ControlType", control.GetType().GetTypeName(false));
+					storage.SetValue("IsToolWindow", !isDocumentPanel);
 					control.Save(storage);
 
 					_dockingControlSettings[control] = storage;

@@ -23,5 +23,6 @@ namespace StockSharp.Studio.Core
 	{
 		string Title { get; }
 		Uri Icon { get; }
+		string Key { get; set; }
 	}
 }

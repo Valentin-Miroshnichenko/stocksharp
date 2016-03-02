@@ -30,7 +30,7 @@ namespace StockSharp.Designer
 	using StockSharp.Designer.Layout;
 	using StockSharp.Xaml.Diagram;
 
-	public partial class DiagramDebuggerControl : IPersistable
+	public partial class DiagramDebuggerControl
 	{
 		private readonly LayoutManager _layoutManager;
 
@@ -230,7 +230,7 @@ namespace StockSharp.Designer
 
 		#region IPersistable
 
-		public void Load(SettingsStorage storage)
+		public override void Load(SettingsStorage storage)
 		{
 			Debugger.Load(storage);
 
@@ -248,7 +248,7 @@ namespace StockSharp.Designer
 				DiagramEditor.Load(diagramEditor);
 		}
 
-		public void Save(SettingsStorage storage)
+		public override void Save(SettingsStorage storage)
 		{
 			Debugger.Save(storage);
 

@@ -50,5 +50,7 @@ namespace StockSharp.Studio.Controls
 		string IStudioControl.Title => (string)ToolTip;
 
 		Uri IStudioControl.Icon => null;
+
+		public string Key { get; set; }
 	}
 }

@@ -70,7 +70,14 @@ namespace StockSharp.Studio.Controls
 			cmdSvc.Register<ChartResetElementsCommand>(this, true, cmd => ChartPanel.Reset(cmd.Elements));
 			cmdSvc.Register<ChartAutoRangeCommand>(this, true, cmd => ChartPanel.IsAutoRange = cmd.AutoRange);
 			cmdSvc.Register<ResetedCommand>(this, true, cmd => OnReseted());
-			
+			//cmdSvc.Register<BindStrategyCommand>(this, true, cmd =>
+			//{
+			//	if (!cmd.CheckControl(this))
+			//		return;
+
+			//	cmd.Source.SetChart(ChartPanel);
+			//});
+
 			//ChartPanel.IsInteracted = true;
 			ChartPanel.SettingsChanged += () => new ControlChangedCommand(this).Process(this);
 			ChartPanel.RegisterOrder += order => new RegisterOrderCommand(order).Process(this);

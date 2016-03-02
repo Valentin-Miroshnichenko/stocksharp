@@ -107,6 +107,8 @@ namespace StockSharp.Studio.Controls
 
 		Uri IStudioControl.Icon => null;
 
+		public string Key { get; set; }
+
 		private DateTime FromDate => From.Value ?? DateTime.MinValue;
 		private DateTime ToDate => To.Value ?? DateTime.MaxValue;
 		private decimal ProfitFrom => MinProfit.Value.HasValue ? MinProfit.Value.Value.To<decimal>() : decimal.MinValue;

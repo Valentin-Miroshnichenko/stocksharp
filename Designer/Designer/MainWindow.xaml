@@ -338,6 +338,9 @@
 										   LargeGlyph="pack://application:,,,/Designer;component/Images/Continue_32x32.png"
 										   Command="{Binding ContinueCommand}" />
                         </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.Name}">
+                            <local:StrategyControlsGallery />
+                        </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
 
                     <dxr:RibbonPage Caption="{x:Static localization:LocalizedStrings.Str3176}"
@@ -386,9 +389,7 @@
                             </dxdo:LayoutGroup>
                             <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
                                 <dxdo:LayoutGroup>
-                                    <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False" >
-
-                                    </dxdo:DocumentGroup>
+                                    <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False" />
                                 </dxdo:LayoutGroup>
                             </dxdo:LayoutGroup>
                         </dxdo:LayoutGroup>

@@ -119,7 +119,7 @@ namespace StockSharp.Studio.Controls
 				if (!cmd.CheckControl(this))
 					return;
 
-				Strategy = cmd.Source;
+				Strategy = (StrategyContainer)cmd.Source;
 			});
 			cmdSvc.Register<StartStrategyCommand>(this, true, cmd =>
 			{

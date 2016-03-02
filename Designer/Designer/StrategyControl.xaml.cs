@@ -6,7 +6,6 @@
 	using System.Windows;
 	using System.Windows.Data;
 	using System.Windows.Input;
-	using System.Windows.Media;
 
 	using Ecng.Common;
 	using Ecng.Configuration;
@@ -30,10 +29,9 @@
 	using StockSharp.Messages;
 	using StockSharp.Studio.Core;
 	using StockSharp.Studio.Core.Commands;
-	using StockSharp.Xaml.Charting;
 	using StockSharp.Xaml.Diagram;
 
-	public partial class StrategyControl
+	public partial class StrategyControl : IStudioCommandScope
 	{
 		#region DependencyProperty
 
@@ -53,12 +51,9 @@
 
 		#endregion
 
-		private readonly BufferedChart _bufferedChart;
 		private readonly LayoutManager _layoutManager;
-		private readonly ICollection<EquityData> _pnlCurve;
-		private readonly ICollection<EquityData> _unrealizedPnLCurve;
-		private readonly ICollection<EquityData> _commissionCurve;
-		private readonly ICollection<EquityData> _posItems;
+
+		private DiagramStrategy _strategy;
 
 		public override string Key => Strategy.Id.ToString();
 
@@ -84,41 +79,43 @@
 		{
 			InitializeComponent();
 
-			_bufferedChart = new BufferedChart(Chart);
 			_layoutManager = new LayoutManager(DockingManager);
 
-			_pnlCurve = EquityCurve.CreateCurve(LocalizedStrings.PnL, Colors.DarkGreen, EquityCurveChartStyles.Area);
-			_unrealizedPnLCurve = EquityCurve.CreateCurve(LocalizedStrings.PnLUnreal, Colors.Black);
-			_commissionCurve = EquityCurve.CreateCurve(LocalizedStrings.Str159, Colors.Red, EquityCurveChartStyles.DashedLine);
+			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
+			cmdSvc.Register<ControlChangedCommand>(this, false, cmd => RaiseChangedCommand());
+			cmdSvc.Register<RequestBindSource>(this, true, cmd => RaiseBindStrategy(cmd.Control));
+			cmdSvc.Register<OpenWindowCommand>(this, true, cmd =>
+			{
+				var ctrl = cmd.CtrlType.CreateInstance<IStudioControl>();
 
-			_posItems = PositionCurve.CreateCurve(LocalizedStrings.Str862, Colors.DarkGreen);
+				if (cmd.IsToolWindow)
+					_layoutManager.OpenToolWindow(ctrl);
+				else
+					_layoutManager.OpenDocumentWindow(ctrl);
+			});
 		}
 
 		protected void Reset()
 		{
-			OrderGrid.Orders.Clear();
-			MyTradeGrid.Trades.Clear();
-
-			_pnlCurve.Clear();
-			_unrealizedPnLCurve.Clear();
-			_commissionCurve.Clear();
-			_posItems.Clear();
+			new ResetedCommand().Process(Strategy);
 		}
 
 		private void OnStrategyChanged(DiagramStrategy oldStrategy, DiagramStrategy newStrategy)
 		{
 			if (oldStrategy != null)
 			{
-				StatisticsGrid.StatisticManager = null;
-
 				ConfigManager
 					.GetService<LogManager>()
 					.Sources
 					.Remove(oldStrategy);
 
+				ConfigManager
+					.GetService<IStudioCommandService>()
+					.UnBind(newStrategy);
+
 				oldStrategy.Composition = null;
 
-				oldStrategy.ParametersChanged -= RaiseChanged;
+				oldStrategy.ParametersChanged -= RaiseChangedCommand;
 
 				oldStrategy.OrderRegistering += OnStrategyOrderRegistering;
 				oldStrategy.OrderReRegistering += OnStrategyOrderReRegistering;
@@ -131,19 +128,18 @@
 				oldStrategy.NewMyTrades += OnStrategyNewMyTrade;
 			}
 
-			DiagramDebuggerControl.Strategy = newStrategy;
+			_strategy = newStrategy;
+            DiagramDebuggerControl.Strategy = newStrategy;
 
 			if (newStrategy == null)
 				return;
-
-			StatisticsGrid.StatisticManager = newStrategy.StatisticManager;
 
 			ConfigManager
 				.GetService<LogManager>()
 				.Sources
 				.Add(newStrategy);
 
-			newStrategy.ParametersChanged += RaiseChanged;
+			newStrategy.ParametersChanged += RaiseChangedCommand;
 
 			newStrategy.OrderRegistering += OnStrategyOrderRegistering;
 			newStrategy.OrderReRegistering += OnStrategyOrderReRegistering;
@@ -157,61 +153,46 @@
 
 			newStrategy.PnLChanged += () =>
 			{
-				var pnl = new EquityData
-				{
-					Time = newStrategy.CurrentTime,
-					Value = newStrategy.PnL - newStrategy.Commission ?? 0
-				};
-
-				var unrealizedPnL = new EquityData
-				{
-					Time = newStrategy.CurrentTime,
-					Value = newStrategy.PnLManager.UnrealizedPnL
-				};
-
-				var commission = new EquityData
-				{
-					Time = newStrategy.CurrentTime,
-					Value = newStrategy.Commission ?? 0
-				};
-
-				_pnlCurve.Add(pnl);
-				_unrealizedPnLCurve.Add(unrealizedPnL);
-				_commissionCurve.Add(commission);
+				new PnLChangedCommand(_strategy.CurrentTime, _strategy.PnL - (_strategy.Commission ?? 0), _strategy.PnLManager.UnrealizedPnL, _strategy.Commission).Process(_strategy);
 			};
 
-			newStrategy.PositionChanged += () => _posItems.Add(new EquityData
-			{
-				Time = newStrategy.CurrentTime,
-				Value = newStrategy.Position
-			});
+			//newStrategy.PositionChanged += () => new PositionCommand(_strategy.CurrentTime, _strategy.Position, false).Process(_strategy);
 
-			newStrategy.SetChart(_bufferedChart);
+			ConfigManager
+				.GetService<IStudioCommandService>()
+				.Bind(newStrategy, this);
+
+			RaiseBindStrategy();
 		}
 
 		private void OnStrategyOrderRegisterFailed(OrderFail fail)
 		{
-			OrderGrid.AddRegistrationFail(fail);
+			new OrderFailCommand(fail, OrderActions.Registering).Process(_strategy);
 		}
 
 		private void OnStrategyOrderReRegistering(Order oldOrder, Order newOrder)
 		{
-			OrderGrid.Orders.Add(newOrder);
+			new ReRegisterOrderCommand(oldOrder, newOrder).Process(_strategy);
 		}
 
 		private void OnStrategyOrderRegistering(Order order)
 		{
-			OrderGrid.Orders.Add(order);
+			new OrderCommand(order, OrderActions.Registering).Process(_strategy);
 		}
 
 		private void OnStrategyNewMyTrade(IEnumerable<MyTrade> trades)
 		{
-			MyTradeGrid.Trades.AddRange(trades);
+			new NewMyTradesCommand(trades).Process(_strategy);
 		}
 
 		private void OnDiagramDebuggerControlChanged()
 		{
-			RaiseChanged();
+			RaiseChangedCommand();
+		}
+
+		private void RaiseBindStrategy(IStudioControl control = null)
+		{
+			new BindStrategyCommand(_strategy, control).SyncProcess(_strategy);
 		}
 
 		#region IPersistable
@@ -221,7 +202,7 @@
 			//base.Load(storage);
 
 			storage.TryLoadSettings<SettingsStorage>("DebuggerControl", s => DiagramDebuggerControl.Load(s));
-			storage.TryLoadSettings<string>("Layout", s => _layoutManager.LoadLayout(s));
+			storage.TryLoadSettings<SettingsStorage>("LayoutManager", s => _layoutManager.Load(s));
 		}
 
 		public override void Save(SettingsStorage storage)
@@ -229,7 +210,7 @@
 			//base.Save(storage);
 
 			storage.SetValue("DebuggerControl", DiagramDebuggerControl.Save());
-			storage.SetValue("Layout", _layoutManager.SaveLayout());
+			storage.SetValue("LayoutManager", _layoutManager.Save());
 		}
 
 		#endregion

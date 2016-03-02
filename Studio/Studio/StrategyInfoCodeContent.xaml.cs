@@ -93,6 +93,8 @@ namespace StockSharp.Studio
 
 		Uri IStudioControl.Icon => null;
 
+		public string Key { get; set; }
+
 		private void SaveCode()
 		{
 			_strategyInfo.Body = CodePanel.Code;

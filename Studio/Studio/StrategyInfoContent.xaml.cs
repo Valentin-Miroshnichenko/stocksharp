@@ -164,6 +164,8 @@ namespace StockSharp.Studio
 
 		Uri IStudioControl.Icon => null;
 
+		public string Key { get; set; }
+
 		#endregion
 
 		private IStudioControl OpenControl(StrategyContainer strategy, string contentTemplate = null)

@@ -41,7 +41,7 @@ namespace StockSharp.Studio.Controls
 					if (_strategy == cmd.Source)
 						return;
 
-					_strategy = cmd.Source;
+					_strategy = (StrategyContainer)cmd.Source;
 					SetGrid(Grid);
 				});
 

@@ -1,4 +1,4 @@
-<UserControl x:Class="StockSharp.Studio.Controls.Level2Panel"
+<local:BaseStudioControl x:Class="StockSharp.Studio.Controls.Level2Panel"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:loc="clr-namespace:StockSharp.Localization;assembly=StockSharp.Localization"
@@ -28,4 +28,4 @@
 
         <local:BuySellPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="0" Margin="0,2,0,0" x:Name="BuySellPanel" />
     </Grid>
-</UserControl>
+</local:BaseStudioControl>

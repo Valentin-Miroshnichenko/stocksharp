@@ -144,6 +144,7 @@ namespace StockSharp.Designer
 			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
 
 			cmdSvc.Register<OpenMarketDataSettingsCommand>(this, true, cmd => OpenMarketDataPanel(cmd.Settings));
+			cmdSvc.Register<ControlChangedCommand>(this, true, cmd => _layoutManager.FlushSettings(cmd.Control));
 
 			cmdSvc.Register<RefreshSecurities>(this, false, cmd => ThreadingHelper
 				.Thread(() =>
@@ -344,7 +345,7 @@ namespace StockSharp.Designer
 
 		private void MainWindow_OnClosing(object sender, CancelEventArgs e)
 		{
-			foreach (var control in _layoutManager.DockingControls)
+			foreach (var control in _layoutManager.DockingControls.OfType<BaseStudioControl>())
 				control.CanClose();
 
 			_layoutManager.Dispose();
@@ -470,7 +471,7 @@ namespace StockSharp.Designer
 			if (control != null)
 			{
 				control.ResetIsChanged();
-				_layoutManager.CloseDocumentWindow(control);
+				_layoutManager.CloseWindow(control);
 			}
 
 			_strategiesRegistry.Remove(item);

@@ -301,6 +301,8 @@ namespace StockSharp.Studio
 
 		public Uri Icon => null;
 
+		public string Key { get; set; }
+
 		#endregion
 
 		private IEnumerable<Strategy> CreateStrategies()

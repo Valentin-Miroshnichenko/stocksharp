@@ -73,5 +73,7 @@ namespace StockSharp.Studio.Strategies
 		{
 			get { return null; }
 		}
+
+		public string Key { get; set; }
 	}
 }
