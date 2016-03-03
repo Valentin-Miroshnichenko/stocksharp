@@ -55,7 +55,7 @@
 
 		private DiagramStrategy _strategy;
 
-		public override string Key => Strategy.Id.ToString();
+		public override string Key => $"_{Strategy.Id.ToString("N")}";
 
 		public ICommand StartCommand { get; protected set; }
 
@@ -63,21 +63,22 @@
 
 		public ICommand RefreshCompositionCommand { get; protected set; }
 
-		public ICommand AddBreakpointCommand => DiagramDebuggerControl.AddBreakpointCommand;
+		public ICommand AddBreakpointCommand { get; private set; }
 
-		public ICommand RemoveBreakpointCommand => DiagramDebuggerControl.RemoveBreakpointCommand;
+		public ICommand RemoveBreakpointCommand { get; private set; }
 
-		public ICommand StepNextCommand => DiagramDebuggerControl.StepNextCommand;
+		public ICommand StepNextCommand { get; private set; }
 
-		public ICommand StepIntoCommand => DiagramDebuggerControl.StepIntoCommand;
+		public ICommand StepIntoCommand { get; private set; }
 
-		public ICommand StepOutCommand => DiagramDebuggerControl.StepOutCommand;
+		public ICommand StepOutCommand { get; private set; }
 
-		public ICommand ContinueCommand => DiagramDebuggerControl.ContinueCommand;
+		public ICommand ContinueCommand { get; private set; }
 
 		public StrategyControl()
 		{
 			InitializeComponent();
+			InitializeCommands();
 
 			_layoutManager = new LayoutManager(DockingManager);
 
@@ -93,6 +94,35 @@
 				else
 					_layoutManager.OpenDocumentWindow(ctrl);
 			});
+			cmdSvc.Register<LoadLayoutCommand>(this, true, cmd => _layoutManager.Load(cmd.Layout.LoadSettingsStorage()));
+			cmdSvc.Register<SaveLayoutCommand>(this, true, cmd => cmd.Layout = _layoutManager.Save().SaveSettingsStorage());
+		}
+
+		private void InitializeCommands()
+		{
+			AddBreakpointCommand = new DelegateCommand(
+				obj => new DebuggerAddBreakpointCommand().Process(_strategy),
+				obj => new DebuggerAddBreakpointCommand().CanProcess(_strategy));
+
+			RemoveBreakpointCommand = new DelegateCommand(
+				obj => new DebuggerRemoveBreakpointCommand().Process(_strategy),
+				obj => new DebuggerRemoveBreakpointCommand().CanProcess(_strategy));
+
+			StepNextCommand = new DelegateCommand(
+				obj => new DebuggerStepNextCommand().Process(_strategy),
+				obj => new DebuggerStepNextCommand().CanProcess(_strategy));
+
+			StepIntoCommand = new DelegateCommand(
+				obj => new DebuggerStepIntoCommand().Process(_strategy),
+				obj => new DebuggerStepIntoCommand().CanProcess(_strategy));
+
+			StepOutCommand = new DelegateCommand(
+				obj => new DebuggerStepOutCommand().Process(_strategy),
+				obj => new DebuggerStepOutCommand().CanProcess(_strategy));
+
+			ContinueCommand = new DelegateCommand(
+				obj => new DebuggerContinueCommand().Process(_strategy),
+				obj => new DebuggerContinueCommand().CanProcess(_strategy));
 		}
 
 		protected void Reset()
@@ -129,9 +159,8 @@
 			}
 
 			_strategy = newStrategy;
-            DiagramDebuggerControl.Strategy = newStrategy;
 
-			if (newStrategy == null)
+			if (_strategy == null)
 				return;
 
 			ConfigManager
@@ -139,28 +168,28 @@
 				.Sources
 				.Add(newStrategy);
 
-			newStrategy.ParametersChanged += RaiseChangedCommand;
+			_strategy.ParametersChanged += RaiseChangedCommand;
 
-			newStrategy.OrderRegistering += OnStrategyOrderRegistering;
-			newStrategy.OrderReRegistering += OnStrategyOrderReRegistering;
-			newStrategy.OrderRegisterFailed += OnStrategyOrderRegisterFailed;
+			_strategy.OrderRegistering += OnStrategyOrderRegistering;
+			_strategy.OrderReRegistering += OnStrategyOrderReRegistering;
+			_strategy.OrderRegisterFailed += OnStrategyOrderRegisterFailed;
 
-			newStrategy.StopOrderRegistering += OnStrategyOrderRegistering;
-			newStrategy.StopOrderReRegistering += OnStrategyOrderReRegistering;
-			newStrategy.StopOrderRegisterFailed += OnStrategyOrderRegisterFailed;
+			_strategy.StopOrderRegistering += OnStrategyOrderRegistering;
+			_strategy.StopOrderReRegistering += OnStrategyOrderReRegistering;
+			_strategy.StopOrderRegisterFailed += OnStrategyOrderRegisterFailed;
 
-			newStrategy.NewMyTrades += OnStrategyNewMyTrade;
+			_strategy.NewMyTrades += OnStrategyNewMyTrade;
 
-			newStrategy.PnLChanged += () =>
+			_strategy.PnLChanged += () =>
 			{
 				new PnLChangedCommand(_strategy.CurrentTime, _strategy.PnL - (_strategy.Commission ?? 0), _strategy.PnLManager.UnrealizedPnL, _strategy.Commission).Process(_strategy);
 			};
 
-			//newStrategy.PositionChanged += () => new PositionCommand(_strategy.CurrentTime, _strategy.Position, false).Process(_strategy);
+			//_strategy.PositionChanged += () => new PositionCommand(_strategy.CurrentTime, _strategy.Position, false).Process(_strategy);
 
 			ConfigManager
 				.GetService<IStudioCommandService>()
-				.Bind(newStrategy, this);
+				.Bind(_strategy, this);
 
 			RaiseBindStrategy();
 		}
@@ -185,11 +214,6 @@
 			new NewMyTradesCommand(trades).Process(_strategy);
 		}
 
-		private void OnDiagramDebuggerControlChanged()
-		{
-			RaiseChangedCommand();
-		}
-
 		private void RaiseBindStrategy(IStudioControl control = null)
 		{
 			new BindStrategyCommand(_strategy, control).SyncProcess(_strategy);
@@ -199,21 +223,25 @@
 
 		public override void Load(SettingsStorage storage)
 		{
-			//base.Load(storage);
-
-			storage.TryLoadSettings<SettingsStorage>("DebuggerControl", s => DiagramDebuggerControl.Load(s));
 			storage.TryLoadSettings<SettingsStorage>("LayoutManager", s => _layoutManager.Load(s));
 		}
 
 		public override void Save(SettingsStorage storage)
 		{
-			//base.Save(storage);
-
-			storage.SetValue("DebuggerControl", DiagramDebuggerControl.Save());
 			storage.SetValue("LayoutManager", _layoutManager.Save());
 		}
 
 		#endregion
+
+		public override void Dispose()
+		{
+			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
+			cmdSvc.UnRegister<ControlChangedCommand>(this);
+			cmdSvc.UnRegister<RequestBindSource>(this);
+			cmdSvc.UnRegister<OpenWindowCommand>(this);
+			cmdSvc.UnRegister<LoadLayoutCommand>(this);
+			cmdSvc.UnRegister<SaveLayoutCommand>(this);
+		}
 	}
 
 	public class LiveStrategyControl : StrategyControl
@@ -576,7 +604,7 @@
 
 			TicksAndDepthsProgress.Value = 0;
 
-			DiagramDebuggerControl.Debugger.IsEnabled = true;
+			new DebuggerStateCommand(true).Process(strategy);
 
 			// raise NewSecurities and NewPortfolio for full fill strategy properties
 			_connector.Connect();
@@ -595,10 +623,8 @@
 		{
 			_connector?.Disconnect();
 
-			DiagramDebuggerControl.Debugger.IsEnabled = false;
-
-			if (DiagramDebuggerControl.Debugger.IsWaiting)
-				DiagramDebuggerControl.Debugger.Continue();
+			new DebuggerStateCommand(false).Process(Strategy);
+			new DebuggerContinueCommand().Process(Strategy);
 		}
 
 		#region IPersistable

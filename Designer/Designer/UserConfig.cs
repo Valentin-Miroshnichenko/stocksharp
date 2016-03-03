@@ -29,8 +29,9 @@
 
 		#endregion
 
+		private const string _layoutKey = "Layout";
+
 		private readonly TimeSpan _period = TimeSpan.FromSeconds(20);
-		private readonly SyncObject _disposeSync = new SyncObject();
 		private readonly object _syncRoot = new object();
 
 		private readonly string _settingsFile;
@@ -146,18 +147,17 @@
 
 		protected override void DisposeManaged()
 		{
+			_isDisposing = true;
+
 			if (!_isReseting)
 			{
-				lock (_syncRoot)
+                lock (_syncRoot)
 				{
-					_isDisposing = true;
-					_isLayoutChanged = true;
-
-					Flush();
-					_flushTimer.Change(TimeSpan.Zero, _period);
+					_isFlushing = true;
+					DisposeTimer();
 				}
 
-				_disposeSync.WaitSignal();
+				Save(GetSettingsClone(), true, true);
 			}
 
 			base.DisposeManaged();
@@ -182,7 +182,7 @@
 
 			lock (_syncRoot)
 			{
-				if (_isFlushing)
+				if (_isFlushing || _isDisposing)
 					return;
 
 				isLayoutChanged = _isLayoutChanged;
@@ -192,40 +192,17 @@
 				_isLayoutChanged = false;
 				_isChanged = false;
 
-				clone = new SettingsStorage();
-				clone.AddRange(Storage);
+				clone = GetSettingsClone();
 			}
 
 			try
 			{
 				if (isChanged || isLayoutChanged)
 				{
-					if (isLayoutChanged)
-						clone.SetValue("Layout", SaveLayout?.Invoke());
-
-					try
-					{
-						CultureInfo.InvariantCulture.DoInCulture(() => new XmlSerializer<SettingsStorage>().Serialize(clone, _settingsFile));
-					}
-					catch (Exception ex)
-					{
-						this.AddErrorLog(ex);
-					}
-
-					if (_isDisposing)
-						_disposeSync.PulseSignal();
+					Save(clone, isLayoutChanged, false);
 				}
 				else
-				{
-					lock (_syncRoot)
-					{
-						if (_flushTimer == null)
-							return;
-
-						_flushTimer.Dispose();
-						_flushTimer = null;
-					}
-				}
+					DisposeTimer();
 			}
 			catch (Exception excp)
 			{
@@ -236,6 +213,48 @@
 				lock (_syncRoot)
 					_isFlushing = false;
 			}
+		}
+
+		private void DisposeTimer()
+		{
+			lock (_syncRoot)
+			{
+				if (_flushTimer == null)
+					return;
+
+				_flushTimer.Dispose();
+				_flushTimer = null;
+			}
+		}
+
+		private void Save(SettingsStorage clone, bool isLayoutChanged, bool saveOnDispose)
+		{
+			if (isLayoutChanged)
+			{
+				var layout = SaveLayout?.Invoke();
+
+				Storage.SetValue(_layoutKey, layout);
+				clone.SetValue(_layoutKey, layout);
+			}
+
+			if (!saveOnDispose && _isDisposing)
+				return;
+
+			try
+			{
+				CultureInfo.InvariantCulture.DoInCulture(() => new XmlSerializer<SettingsStorage>().Serialize(clone, _settingsFile));
+			}
+			catch (Exception ex)
+			{
+				this.AddErrorLog(ex);
+			}
+		}
+
+		private SettingsStorage GetSettingsClone()
+		{
+			var clone = new SettingsStorage();
+			clone.AddRange(Storage);
+			return clone;
 		}
 
 		#region IPersistableService

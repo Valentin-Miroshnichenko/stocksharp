@@ -37,7 +37,7 @@ namespace StockSharp.Designer
 
 		public CompositionDiagramElement Element { get; }
 
-		public string Key => Element.TypeId.ToString();
+		public string Key => $"_{Element.TypeId.ToString("N")}";
 
 		public CompositionItem(CompositionType type, CompositionDiagramElement element)
 		{

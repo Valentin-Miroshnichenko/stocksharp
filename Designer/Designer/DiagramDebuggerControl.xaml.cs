@@ -18,29 +18,34 @@ namespace StockSharp.Designer
 	using System;
 	using System.ComponentModel;
 	using System.Windows;
-	using System.Windows.Input;
-	using System.Windows.Media;
 
 	using Ecng.Common;
+	using Ecng.ComponentModel;
+	using Ecng.Configuration;
 	using Ecng.Serialization;
 	using Ecng.Xaml;
 
 	using StockSharp.Algo;
 	using StockSharp.Algo.Strategies;
+	using StockSharp.Designer.Commands;
 	using StockSharp.Designer.Layout;
+	using StockSharp.Localization;
+	using StockSharp.Studio.Core.Commands;
 	using StockSharp.Xaml.Diagram;
 
+	[DisplayNameLoc(LocalizedStrings.Str3230Key)]
+	[DescriptionLoc(LocalizedStrings.Str3231Key)]
+	[Icon("images/bug_24x24.png")]
 	public partial class DiagramDebuggerControl
 	{
 		private readonly LayoutManager _layoutManager;
-
-		private bool _isDefaultLayout = true;
-		private bool _isLoaded;
 
 		#region Strategy
 
 		public static readonly DependencyProperty StrategyProperty = DependencyProperty.Register(nameof(Strategy), typeof(DiagramStrategy), typeof(DiagramDebuggerControl),
 			new PropertyMetadata(null, OnStrategyPropertyChanged));
+
+		private SettingsStorage _debuggerSettings;
 
 		private static void OnStrategyPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
 		{
@@ -57,74 +62,57 @@ namespace StockSharp.Designer
 
 		public DiagramDebugger Debugger { get; private set; }
 
-		public ICommand AddBreakpointCommand { get; private set; }
-
-		public ICommand RemoveBreakpointCommand { get; private set; }
-
-		public ICommand StepNextCommand { get; private set; }
-
-		public ICommand StepIntoCommand { get; private set; }
-
-		public ICommand StepOutCommand { get; private set; }
-
-		public ICommand ContinueCommand { get; private set; }
-
-		public event Action Changed;
-
 		public DiagramDebuggerControl()
 		{
 			InitializeCommands();
             InitializeComponent();
 			
 			_layoutManager = new LayoutManager(DockingManager);
-		}
 
-		protected override void OnRender(DrawingContext drawingContext)
-		{
-			base.OnRender(drawingContext);
-
-			if (_isLoaded)
-				return;
-
-			_isLoaded = true;
-
-			if (!_isDefaultLayout)
-				return;
-
-			//PropertyGridControlAnchorable.ToggleAutoHide();
+			WhenLoaded(()=> new RequestBindSource(this).SyncProcess(this));
 		}
 
 		private void InitializeCommands()
 		{
-			AddBreakpointCommand = new DelegateCommand(
-				obj =>
+			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
+			cmdSvc.Register<BindStrategyCommand>(this, true, cmd =>
+			{
+				if (!cmd.CheckControl(this))
+					return;
+
+				Strategy = cmd.Source as DiagramStrategy;
+			});
+			cmdSvc.Register<DebuggerStateCommand>(this, true, cmd => Debugger.IsEnabled = cmd.IsEnabled);
+
+			cmdSvc.Register<DebuggerAddBreakpointCommand>(this, true, 
+				cmd =>
 				{
 					Debugger.AddBreak(DiagramEditor.SelectedElement.SelectedSocket);
-					Changed.SafeInvoke();
+					RaiseChangedCommand();
 				},
-				obj => SafeCheckDebugger((d, s) => !d.IsBreak(s)));
+				cmd => SafeCheckDebugger((d, s) => !d.IsBreak(s)));
 
-			RemoveBreakpointCommand = new DelegateCommand(
-				obj =>
+			cmdSvc.Register<DebuggerRemoveBreakpointCommand>(this, true,
+				cmd =>
 				{
 					Debugger.RemoveBreak(DiagramEditor.SelectedElement.SelectedSocket);
-					Changed.SafeInvoke();
+					RaiseChangedCommand();
 				},
-				obj => SafeCheckDebugger((d, s) => d.IsBreak(s)));
+				cmd => SafeCheckDebugger((d, s) => d.IsBreak(s)));
 
-			StepNextCommand = new DelegateCommand(
-				obj => Debugger.StepNext(),
-				obj => Debugger != null && Debugger.IsWaiting);
+			cmdSvc.Register<DebuggerStepNextCommand>(this, true,
+				cmd => Debugger.StepNext(),
+				cmd => Debugger != null && Debugger.IsWaiting);
 
-			StepIntoCommand = new DelegateCommand(
+			cmdSvc.Register<DebuggerStepIntoCommand>(this, true,
 				obj => Debugger.StepInto(DiagramEditor?.SelectedElement as CompositionDiagramElement),
 				obj => (Debugger != null && Debugger.IsWaitingOnInput && Debugger.CanStepInto) || DiagramEditor?.SelectedElement is CompositionDiagramElement);
 
-			StepOutCommand = new DelegateCommand(
+			cmdSvc.Register<DebuggerStepOutCommand>(this, true,
 				obj => Debugger.StepOut(DiagramEditor.Composition),
 				obj => Debugger != null && Debugger.CanStepOut);
 
-			ContinueCommand = new DelegateCommand(
+			cmdSvc.Register<DebuggerContinueCommand>(this, true,
 				obj => Debugger.Continue(),
 				obj => Debugger != null && Debugger.IsWaiting);
 		}
@@ -156,6 +144,8 @@ namespace StockSharp.Designer
 				Debugger = new DiagramDebugger(composition);
 				Debugger.Break += OnDebuggerBreak;
 				Debugger.CompositionChanged += OnDebuggerCompositionChanged;
+
+				SafeLoadDebuggerSettings();
 
 				NoStrategyLabel.Visibility = Visibility.Hidden;
 				DiagramEditor.Composition = composition;
@@ -228,19 +218,27 @@ namespace StockSharp.Designer
 				func(Debugger, DiagramEditor.SelectedElement.SelectedSocket);
 		}
 
+		private void SafeLoadDebuggerSettings()
+		{
+			if (Debugger == null || _debuggerSettings == null)
+				return;
+
+			Debugger.Load(_debuggerSettings);
+		}
+
 		#region IPersistable
 
 		public override void Load(SettingsStorage storage)
 		{
-			Debugger.Load(storage);
+			base.Load(storage);
+
+			_debuggerSettings = storage.GetValue<SettingsStorage>("DebuggerSettings");
+			SafeLoadDebuggerSettings();
 
 			var layout = storage.GetValue<string>("Layout");
 
 			if (!layout.IsEmpty())
-			{
-				_isDefaultLayout = false;
 				_layoutManager.LoadLayout(layout);
-			}
 
 			var diagramEditor = storage.GetValue<SettingsStorage>("DiagramEditor");
 
@@ -250,12 +248,28 @@ namespace StockSharp.Designer
 
 		public override void Save(SettingsStorage storage)
 		{
-			Debugger.Save(storage);
+			base.Save(storage);
+
+			if (Debugger != null)
+				storage.SetValue("DebuggerSettings", _debuggerSettings = Debugger.Save());
 
 			storage.SetValue("Layout", _layoutManager.SaveLayout());
 			storage.SetValue("DiagramEditor", DiagramEditor.Save());
 		}
 
 		#endregion
+
+		public override void Dispose()
+		{
+			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
+			cmdSvc.UnRegister<BindStrategyCommand>(this);
+			cmdSvc.UnRegister<DebuggerStateCommand>(this);
+			cmdSvc.UnRegister<DebuggerAddBreakpointCommand>(this);
+			cmdSvc.UnRegister<DebuggerRemoveBreakpointCommand>(this);
+			cmdSvc.UnRegister<DebuggerStepNextCommand>(this);
+			cmdSvc.UnRegister<DebuggerStepIntoCommand>(this);
+			cmdSvc.UnRegister<DebuggerStepOutCommand>(this);
+			cmdSvc.UnRegister<DebuggerContinueCommand>(this);
+		}
 	}
 }

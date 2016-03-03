@@ -17,7 +17,6 @@ namespace StockSharp.Designer.Layout
 {
 	using System;
 	using System.Collections.Generic;
-	using System.Globalization;
 	using System.IO;
 	using System.Linq;
 	using System.Text;
@@ -89,8 +88,8 @@ namespace StockSharp.Designer.Layout
 
 			if (panel == null)
 			{
-				panel = DockingManager.DockController.AddPanel(DockType.Left);
-				panel.Name = "_" + content.Key.Replace("-", "_");
+				panel = DockingManager.DockController.AddPanel(DockType.Right);
+				panel.Name = content.Key;
 				panel.Content = content;
 				panel.ShowCloseButton = canClose;
 
@@ -115,7 +114,7 @@ namespace StockSharp.Designer.Layout
 			if (document == null)
 			{
 				document = DockingManager.DockController.AddDocumentPanel(_documentGroup);
-				document.Name = "_" + content.Key.Replace("-", "_");
+				document.Name = content.Key;
 				document.Content = content;
 				document.ShowCloseButton = canClose;
 
@@ -147,6 +146,9 @@ namespace StockSharp.Designer.Layout
 		{
 			if (storage == null)
 				throw new ArgumentNullException(nameof(storage));
+
+			foreach (var panel in _panels.Values.ToArray())
+				DockingManager.DockController.Close(panel);
 
 			_panels.Clear();
 			_changedControls.Clear();
@@ -223,9 +225,6 @@ namespace StockSharp.Designer.Layout
 				foreach (var content in items)
 				{
 					_panels[content.Name] = content;
-
-                    //content.DoIf<LayoutPanel, DocumentPanel>(d => _panels[d.Name] = d);
-					//content.DoIf<ContentItem, DocumentPanel>(d => _anchorables[d.ContentId] = d);
 
 					if (!(content.Content is BaseStudioControl))
 					{
@@ -337,23 +336,20 @@ namespace StockSharp.Designer.Layout
 
 		private void Save(IEnumerable<IStudioControl> items, bool isLayoutChanged)
 		{
-			CultureInfo.InvariantCulture.DoInCulture(() =>
+			foreach (var control in items)
 			{
-				foreach (var control in items)
-				{
-					var isDocumentPanel = _panels.TryGetValue(control.Key) is DocumentPanel;
+				var isDocumentPanel = _panels.TryGetValue(control.Key) is DocumentPanel;
 
-					var storage = new SettingsStorage();
-					storage.SetValue("ControlType", control.GetType().GetTypeName(false));
-					storage.SetValue("IsToolWindow", !isDocumentPanel);
-					control.Save(storage);
+				var storage = new SettingsStorage();
+				storage.SetValue("ControlType", control.GetType().GetTypeName(false));
+				storage.SetValue("IsToolWindow", !isDocumentPanel);
+				control.Save(storage);
 
-					_dockingControlSettings[control] = storage;
-				}
+				_dockingControlSettings[control] = storage;
+			}
 
-				if (isLayoutChanged)
-					_layout = SaveLayout();
-			});
+			if (isLayoutChanged)
+				_layout = SaveLayout();
 		}
 
 		private static BaseStudioControl LoadBaseStudioControl(SettingsStorage settings)

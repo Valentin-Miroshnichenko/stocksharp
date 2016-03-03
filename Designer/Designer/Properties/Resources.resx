@@ -133,4 +133,7 @@
   <data name="strategy_d2d7aeb2_ca92_4a88_9f2b_dccb72949af1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Strategies\d2d7aeb2_ca92_4a88_9f2b_dccb72949af1.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1251</value>
   </data>
+  <data name="DefaultStrategyLayout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Layout\DefaultStrategyLayout.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

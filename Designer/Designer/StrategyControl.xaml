@@ -20,9 +20,9 @@
         <ProgressBar Grid.Row="0" Height="5" x:Name="TicksAndDepthsProgress" />
 
         <dxdo:DockLayoutManager x:Name="DockingManager" Grid.Row="1" FloatingMode="Desktop" DockingStyle="VS2010"
-								FloatingDocumentContainer="DocumentHost">
+								FloatingDocumentContainer="DocumentHost" ClosingBehavior="ImmediatelyRemove">
             <dxdo:LayoutGroup Name="Root">
-                <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">
+                <!--<dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">
                     <dxdo:LayoutGroup Orientation="Horizontal" ItemHeight="3*">
                         
 						<dxdo:LayoutGroup DestroyOnClosingChildren="False" ItemWidth="*">
@@ -65,7 +65,7 @@
                         </dxdo:LayoutGroup>
 						
                     </dxdo:LayoutGroup>
-                </dxdo:LayoutGroup>
+                </dxdo:LayoutGroup>-->
             </dxdo:LayoutGroup>
         </dxdo:DockLayoutManager>
     </Grid>

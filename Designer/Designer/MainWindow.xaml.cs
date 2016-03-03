@@ -667,6 +667,8 @@ namespace StockSharp.Designer
 			};
 
 			_layoutManager.OpenDocumentWindow(content);
+
+			new LoadLayoutCommand(Properties.Resources.DefaultStrategyLayout).Process(strategy);
 		}
 
 		private void OpenLive(CompositionItem item)
@@ -682,6 +684,8 @@ namespace StockSharp.Designer
 			};
 
 			_layoutManager.OpenDocumentWindow(content);
+
+			new LoadLayoutCommand(Properties.Resources.DefaultStrategyLayout).Process(strategy);
 		}
 
 		private void OpenMarketDataPanel(MarketDataSettings settings)

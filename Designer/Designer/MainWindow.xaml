@@ -81,7 +81,8 @@
 	
 	<Window.Resources>
         <local:CompositionTypeToVisibilityConverter x:Key="CompositionTypeToVisibilityConverter" Type="Composition"/>
-	</Window.Resources>
+        <local:ObjectsEqualityConverter x:Key="ObjectsEqualityConverter"/>
+    </Window.Resources>
 
     <dxb:BarManager>
         <Grid Margin="3">
@@ -184,6 +185,32 @@
                                 <dxmvvm:Interaction.Behaviors>
                                     <dxr:RibbonGalleryItemThemeSelectorBehavior/>
                                 </dxmvvm:Interaction.Behaviors>
+                                <dxr:RibbonGalleryBarItem.DropDownMenuItems >
+                                    <dxr:RibbonSpacingSelectorItem Content="Space mode"/>
+
+                                    <dxb:BarSplitButtonItem Content="Ribbon Style" ActAsDropDown="True" ItemClickBehaviour="CloseAllPopups">
+                                        <dxb:BarSplitButtonItem.PopupControl>
+                                            <dxb:PopupControlContainer>
+                                                <dxb:GalleryControl>
+                                                    <dxb:Gallery AllowFilter="False" DataContext="{Binding ElementName=pSettings, Path=DataContext}" ItemDescriptionHorizontalAlignment="Left" AutoHideGallery="True" ItemCheckMode="Single">
+                                                        <dxb:GalleryItemGroup Caption="Classic">
+                                                            <dxb:GalleryItem Caption="Office2007" Description="MS Office 2007 style Ribbon" 
+																			 IsChecked="{Binding CurrentOptions.RibbonStyle, Mode=TwoWay, Converter={StaticResource ObjectsEqualityConverter}, ConverterParameter=Office2007}" />
+                                                            <dxb:GalleryItem Caption="Office2010" Description="MS Office 2010 style Ribbon" 
+																			 IsChecked="{Binding CurrentOptions.RibbonStyle, Mode=TwoWay, Converter={StaticResource ObjectsEqualityConverter}, ConverterParameter=Office2010}" />
+                                                        </dxb:GalleryItemGroup>
+                                                        <dxb:GalleryItemGroup Caption="Tablet">
+                                                            <dxb:GalleryItem Caption="TabletOffice" Description="Emulates the UI found in MS Office for iPad" 
+																			 IsChecked="{Binding CurrentOptions.RibbonStyle, Mode=TwoWay, Converter={StaticResource ObjectsEqualityConverter}, ConverterParameter=TabletOffice}" />
+                                                            <dxb:GalleryItem Caption="OfficeSlim" Description="The Ribbon style inspired by the ribbon UI introduced in Microsoft &quot;Office Universal&quot; apps." 
+																			 IsChecked="{Binding CurrentOptions.RibbonStyle, Mode=TwoWay, Converter={StaticResource ObjectsEqualityConverter}, ConverterParameter=OfficeSlim}" />
+                                                        </dxb:GalleryItemGroup>
+                                                    </dxb:Gallery>
+                                                </dxb:GalleryControl>
+                                            </dxb:PopupControlContainer>
+                                        </dxb:BarSplitButtonItem.PopupControl>
+                                    </dxb:BarSplitButtonItem>
+                                </dxr:RibbonGalleryBarItem.DropDownMenuItems>
                             </dxr:RibbonGalleryBarItem>
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
@@ -274,6 +301,13 @@
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
+                            <Style TargetType="{x:Type local:StrategyControlsGallery}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataContext" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
                         </dxr:RibbonPage.Resources>
                         <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.Str1559}">
                             <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.RefreshScheme}"
@@ -338,17 +372,24 @@
 										   LargeGlyph="pack://application:,,,/Designer;component/Images/Continue_32x32.png"
 										   Command="{Binding ContinueCommand}" />
                         </dxr:RibbonPageGroup>
-                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.Name}">
-                            <local:StrategyControlsGallery />
+                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.XamlStr252}">
+                            <local:StrategyControlsGallery x:Name="HistoryGallery" />
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
 
                     <dxr:RibbonPage Caption="{x:Static localization:LocalizedStrings.Str3176}"
-								x:Name="RibbonLiveTab">
+									x:Name="RibbonLiveTab">
                         <dxr:RibbonPage.Resources>
                             <Style TargetType="{x:Type dxb:BarButtonItem}">
                                 <Style.Triggers>
                                     <Trigger Property="Command" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="{x:Type local:StrategyControlsGallery}">
+                                <Style.Triggers>
+                                    <Trigger Property="DataContext" Value="{x:Null}">
                                         <Setter Property="IsEnabled" Value="False" />
                                     </Trigger>
                                 </Style.Triggers>
@@ -366,11 +407,15 @@
                             <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str242}"
 										   LargeGlyph="pack://application:,,,/Designer;component/Images/stop_32x32.png"  />
                         </dxr:RibbonPageGroup>
+                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.XamlStr252}">
+                            <local:StrategyControlsGallery x:Name="LiveGallery" />
+                        </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
                 </dxr:RibbonDefaultPageCategory>
             </dxr:RibbonControl>
 
             <dxdo:DockLayoutManager x:Name="DockingManager" Grid.Row="1" FloatingMode="Desktop" DockingStyle="VS2010"
+									ClosingBehavior="ImmediatelyRemove"
 									LayoutItemActivated="DockingManager_OnLayoutItemActivated"
 									DockItemActivated="DockingManager_OnDockItemActivated"
 									DockItemClosed="DockingManager_OnDockItemClosed"

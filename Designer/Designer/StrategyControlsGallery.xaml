@@ -4,6 +4,7 @@
              xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
              xmlns:local="clr-namespace:StockSharp.Designer"
+             xmlns:loc="clr-namespace:StockSharp.Localization;assembly=StockSharp.Localization"
              Content="Gallery">
 
     <dxr:RibbonGalleryBarItem.DropDownGallery>
@@ -21,6 +22,7 @@
             </dxb:GalleryItemGroup>
         </dxb:Gallery>
     </dxr:RibbonGalleryBarItem.DropDownGallery>
+	
     <dxr:RibbonGalleryBarItem.Gallery>
         <dxb:Gallery IsItemCaptionVisible="True" ColCount="3" ItemGlyphSize="16,16" IsItemDescriptionVisible="False"
 					 AllowFilter="False" MinColCount="3" ItemGlyphHorizontalAlignment="Center"
@@ -37,4 +39,14 @@
             </dxb:GalleryItemGroup>
         </dxb:Gallery>
     </dxr:RibbonGalleryBarItem.Gallery>
+
+    <dxr:RibbonGalleryBarItem.DropDownMenuItems >
+        <dxb:BarButtonItem Content="{x:Static loc:LocalizedStrings.XamlStr163}"
+						   Glyph="pack://application:,,,/StockSharp.Xaml;component/Images/open_16x16.png"
+						   IsEnabled="True" ItemClick="LoadLayout_OnItemClick" />
+
+        <dxb:BarButtonItem Content="{x:Static loc:LocalizedStrings.XamlStr694}"
+						   Glyph="pack://application:,,,/StockSharp.Xaml;component/Images/save_16x16.png"
+						   IsEnabled="True" ItemClick="SaveLayout_OnItemClick"/>
+    </dxr:RibbonGalleryBarItem.DropDownMenuItems>
 </dxr:RibbonGalleryBarItem>

@@ -2,7 +2,6 @@ namespace StockSharp.Designer
 {
 	using System;
 	using System.Globalization;
-	using System.Windows;
 	using System.Windows.Data;
 
 	sealed class TitleConverter : IValueConverter
@@ -40,6 +39,26 @@ namespace StockSharp.Designer
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			throw new NotSupportedException();
+		}
+	}
+
+	sealed public class ObjectsEqualityConverter : IValueConverter
+	{
+		public bool Inverse { get; set; }
+
+		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			if (value == null)
+				return null;
+
+			var result = Equals(value.ToString(), parameter);
+
+			return Inverse ? !result : result;
+		}
+
+		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			return (bool)value ? parameter : null;
 		}
 	}
 }

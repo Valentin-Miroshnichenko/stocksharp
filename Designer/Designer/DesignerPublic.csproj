@@ -144,6 +144,7 @@
       <Link>Properties\StockSharpAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="Commands\DebuggerCommands.cs" />
     <Compile Include="Commands\SetDefaultEmulationSettingsCommand.cs" />
     <Compile Include="CompositionItem.cs" />
     <Compile Include="Configuration\ControlElement.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="StrategyControlsGallery.xaml.cs">
       <DependentUpon>StrategyControlsGallery.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TitleConverter.cs" />
+    <Compile Include="Converters.cs" />
     <Compile Include="StrategyControl.xaml.cs">
       <DependentUpon>StrategyControl.xaml</DependentUpon>
     </Compile>
@@ -235,6 +236,8 @@
     <Resource Include="Images\TreeComposition_32x32.png" />
     <Resource Include="Images\TreeFolder_32x32.png" />
     <Resource Include="Images\TreeStrategy_32x32.png" />
+    <Resource Include="Images\bug_24x24.png" />
+    <Resource Include="Layout\DefaultStrategyLayout.xml" />
     <Content Include="Themes.WPF.targets" />
   </ItemGroup>
   <ItemGroup>

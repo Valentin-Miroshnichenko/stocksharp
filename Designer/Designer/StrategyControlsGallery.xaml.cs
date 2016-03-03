@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Windows;
 
 	using DevExpress.Xpf.Bars;
@@ -9,6 +10,9 @@
 	using Ecng.Common;
 	using Ecng.Xaml;
 
+	using Ookii.Dialogs.Wpf;
+
+	using StockSharp.Localization;
 	using StockSharp.Studio.Core.Commands;
 
 	public partial class StrategyControlsGallery
@@ -40,6 +44,43 @@
 				return;
 
 			new OpenWindowCommand(Guid.NewGuid().To<string>(), type.Item1, true).SyncProcess(ctrl.Strategy);
+		}
+
+		private void SaveLayout_OnItemClick(object sender, ItemClickEventArgs e)
+		{
+			var dlg = new VistaSaveFileDialog
+			{
+				Filter = LocalizedStrings.Str3584,
+				DefaultExt = "xml",
+				RestoreDirectory = true
+			};
+
+			if (dlg.ShowDialog(Application.Current.GetActiveOrMainWindow()) != true)
+				return;
+
+			var cmd = new SaveLayoutCommand();
+
+			cmd.SyncProcess(((StrategyControl)DataContext).Strategy);
+
+			if (!cmd.Layout.IsEmpty())
+				File.WriteAllText(dlg.FileName, cmd.Layout);
+		}
+
+		private void LoadLayout_OnItemClick(object sender, ItemClickEventArgs e)
+		{
+			var dlg = new VistaOpenFileDialog
+			{
+				Filter = LocalizedStrings.Str3584,
+				CheckFileExists = true,
+				RestoreDirectory = true
+			};
+
+			if (dlg.ShowDialog(Application.Current.GetActiveOrMainWindow()) != true)
+				return;
+
+			var data = File.ReadAllText(dlg.FileName);
+
+			new LoadLayoutCommand(data).SyncProcess(((StrategyControl)DataContext).Strategy);
 		}
 	}
 }

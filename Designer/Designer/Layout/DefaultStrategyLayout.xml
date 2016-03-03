@@ -1,0 +1,1896 @@
+<SettingsStorage>
+  <KeyValuePairBeginStringAndObjectEnd>
+    <key>Controls</key>
+    <value>
+      <Type type="string">Ecng.Serialization.SettingsStorage[], Ecng.Serialization</Type>
+      <Value type="Ecng.Serialization.SettingsStorage[], Ecng.Serialization">
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.CandleChartPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Chart</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_1792b83d6d344d83b8f38668ee8cc4df</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.OrdersPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Orders</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_03fc53738f464bffb5f68c88e082807c</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>OrderGrid</key>
+            <value>
+              <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+              <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>Columns</key>
+                  <value>
+                    <Type type="string">Ecng.Serialization.SettingsStorage[], Ecng.Serialization</Type>
+                    <Value type="Ecng.Serialization.SettingsStorage[], Ecng.Serialization">
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">100</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">0</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">100</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">1</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">100</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">2</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">100</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">3</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">4</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">5</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">6</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">7</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">8</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">9</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">10</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">40</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">11</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">12</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">13</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">14</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">40</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">15</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">16</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">17</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">18</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">19</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">20</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">21</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">22</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">23</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                    </Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>AutoScroll</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">False</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>GroupingColumns</key>
+                  <value>
+                    <Type type="string">System.String[], mscorlib</Type>
+                    <Value type="System.String[], mscorlib" />
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowHeaderInGroupTitle</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>DdeSettings</key>
+                  <value>
+                    <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+                    <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>Service</key>
+                        <value>
+                          <Type type="string">string</Type>
+                          <Value type="string">EXCEL</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>Topic</key>
+                        <value>
+                          <Type type="string">string</Type>
+                          <Value type="string">[Book1.xlsx]Sheet1</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>ColumnOffset</key>
+                        <value>
+                          <Type type="string">int</Type>
+                          <Value type="int">0</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>RowOffset</key>
+                        <value>
+                          <Type type="string">int</Type>
+                          <Value type="int">0</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>ShowHeaders</key>
+                        <value>
+                          <Type type="string">bool</Type>
+                          <Value type="bool">False</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                    </Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+              </Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.MyTradesTable, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Trades</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_6efc9caeeab944b2be4db32c1d0f7fdf</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>TradesGrid</key>
+            <value>
+              <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+              <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>Columns</key>
+                  <value>
+                    <Type type="string">Ecng.Serialization.SettingsStorage[], Ecng.Serialization</Type>
+                    <Value type="Ecng.Serialization.SettingsStorage[], Ecng.Serialization">
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">70</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">0</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">70</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">1</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">2</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">3</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">4</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">50</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">5</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">6</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">7</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Visible</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">8</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">9</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">60</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">10</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">11</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">120</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">12</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                      <SettingsStorage>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>SortDirection</key>
+                          <value isNull="true" />
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthType</key>
+                          <value>
+                            <Type type="string">System.Windows.Controls.DataGridLengthUnitType, PresentationFramework</Type>
+                            <Value type="System.Windows.Controls.DataGridLengthUnitType, PresentationFramework">Pixel</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>WidthValue</key>
+                          <value>
+                            <Type type="string">double</Type>
+                            <Value type="double">40</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>Visibility</key>
+                          <value>
+                            <Type type="string">System.Windows.Visibility, PresentationCore</Type>
+                            <Value type="System.Windows.Visibility, PresentationCore">Collapsed</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                        <KeyValuePairBeginStringAndObjectEnd>
+                          <key>DisplayIndex</key>
+                          <value>
+                            <Type type="string">int</Type>
+                            <Value type="int">13</Value>
+                          </value>
+                        </KeyValuePairBeginStringAndObjectEnd>
+                      </SettingsStorage>
+                    </Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>AutoScroll</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">False</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>GroupingColumns</key>
+                  <value>
+                    <Type type="string">System.String[], mscorlib</Type>
+                    <Value type="System.String[], mscorlib" />
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowHeaderInGroupTitle</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>DdeSettings</key>
+                  <value>
+                    <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+                    <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>Service</key>
+                        <value>
+                          <Type type="string">string</Type>
+                          <Value type="string">EXCEL</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>Topic</key>
+                        <value>
+                          <Type type="string">string</Type>
+                          <Value type="string">[Book1.xlsx]Sheet1</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>ColumnOffset</key>
+                        <value>
+                          <Type type="string">int</Type>
+                          <Value type="int">0</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>RowOffset</key>
+                        <value>
+                          <Type type="string">int</Type>
+                          <Value type="int">0</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                      <KeyValuePairBeginStringAndObjectEnd>
+                        <key>ShowHeaders</key>
+                        <value>
+                          <Type type="string">bool</Type>
+                          <Value type="bool">False</Value>
+                        </value>
+                      </KeyValuePairBeginStringAndObjectEnd>
+                    </Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+              </Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.EquityCurveChartPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">P&amp;L</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_d12f480b5c98463d983147b9f5768a19</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.PositionChartPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Positions (chart)</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_22d60ff0537f41b2b16d477028b63571</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.StatisticsPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Statistics</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_e1b697fb90da49889b74ec59d4eae574</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Designer.DiagramDebuggerControl, Designer</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Debugger</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_90300cc54981413fa6cc6cfc5cb0dbda</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>DebuggerSettings</key>
+            <value>
+              <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+              <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>Breakpoints</key>
+                  <value>
+                    <Type type="string">Ecng.Serialization.SettingsStorage[], Ecng.Serialization</Type>
+                    <Value type="Ecng.Serialization.SettingsStorage[], Ecng.Serialization" />
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+              </Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Layout</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">﻿&lt;XtraSerializer version="1.0" application="DockLayoutManager"&gt;
+  &lt;property name="#LayoutVersion" isnull="true" /&gt;
+  &lt;property name="$DockLayoutManager" iskey="true" value="DockLayoutManager"&gt;
+    &lt;property name="ManualClosedPanelsBarVisibility"&gt;false&lt;/property&gt;
+    &lt;property name="FloatingMode"&gt;Desktop&lt;/property&gt;
+    &lt;property name="Items" iskey="true" value="5"&gt;
+      &lt;property name="Item1" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;Root&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item2" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="Orientation"&gt;Horizontal&lt;/property&gt;
+        &lt;property name="ItemHeight"&gt;*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;Root&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem1&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item3" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="IsActive"&gt;true&lt;/property&gt;
+        &lt;property name="AllowClose"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;DiagramEditorPanel&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item4" isnull="true" iskey="true"&gt;
+        &lt;property name="DockType"&gt;Right&lt;/property&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;AutoHideGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName"&gt;$AutoHideGroups&lt;/property&gt;
+        &lt;property name="Name"&gt;dockItem2&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item5" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="AllowClose"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem2&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;PropertyGridPanel&lt;/property&gt;
+      &lt;/property&gt;
+    &lt;/property&gt;
+    &lt;property name="DockingStyle"&gt;VS2010&lt;/property&gt;
+    &lt;property name="FloatingDocumentContainer"&gt;DocumentHost&lt;/property&gt;
+    &lt;property name="RestoreLayoutOptions.FloatPanelsRestoreOffset" OwnerType="DevExpress.Xpf.Docking.RestoreLayoutOptions" DependencyPropertyType="System.Windows.Point"&gt;216,222&lt;/property&gt;
+  &lt;/property&gt;
+&lt;/XtraSerializer&gt;</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>DiagramEditor</key>
+            <value>
+              <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+              <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>Scale</key>
+                  <value>
+                    <Type type="string">double</Type>
+                    <Value type="double">1</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowOverview</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">False</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+              </Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+      </Value>
+    </value>
+  </KeyValuePairBeginStringAndObjectEnd>
+  <KeyValuePairBeginStringAndObjectEnd>
+    <key>Layout</key>
+    <value>
+      <Type type="string">string</Type>
+      <Value type="string">﻿&lt;XtraSerializer version="1.0" application="DockLayoutManager"&gt;
+  &lt;property name="#LayoutVersion" isnull="true" /&gt;
+  &lt;property name="$DockLayoutManager" iskey="true" value="DockLayoutManager"&gt;
+    &lt;property name="ManualClosedPanelsBarVisibility"&gt;false&lt;/property&gt;
+    &lt;property name="FloatingMode"&gt;Desktop&lt;/property&gt;
+    &lt;property name="Items" iskey="true" value="9"&gt;
+      &lt;property name="Item1" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;Root&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item2" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="ItemWidth"&gt;0.985815602836879*&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;846,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;true&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;Root&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_90300cc54981413fa6cc6cfc5cb0dbda&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item3" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;0&lt;/property&gt;
+        &lt;property name="ItemWidth"&gt;1.01418439716312*&lt;/property&gt;
+        &lt;property name="ItemHeight"&gt;*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;TabbedGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;Root&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem1&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item4" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_1792b83d6d344d83b8f38668ee8cc4df&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item5" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;279,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_03fc53738f464bffb5f68c88e082807c&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item6" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;336,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_6efc9caeeab944b2be4db32c1d0f7fdf&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item7" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;421,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_d12f480b5c98463d983147b9f5768a19&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item8" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;562,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_22d60ff0537f41b2b16d477028b63571&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item9" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;846,820&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_e1b697fb90da49889b74ec59d4eae574&lt;/property&gt;
+      &lt;/property&gt;
+    &lt;/property&gt;
+    &lt;property name="DockingStyle"&gt;VS2010&lt;/property&gt;
+    &lt;property name="FloatingDocumentContainer"&gt;DocumentHost&lt;/property&gt;
+    &lt;property name="RestoreLayoutOptions.FloatPanelsRestoreOffset" OwnerType="DevExpress.Xpf.Docking.RestoreLayoutOptions" DependencyPropertyType="System.Windows.Point"&gt;212,186&lt;/property&gt;
+  &lt;/property&gt;
+&lt;/XtraSerializer&gt;</Value>
+    </value>
+  </KeyValuePairBeginStringAndObjectEnd>
+</SettingsStorage>
