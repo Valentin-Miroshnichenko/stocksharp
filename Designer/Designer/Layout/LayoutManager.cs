@@ -21,7 +21,6 @@ namespace StockSharp.Designer.Layout
 	using System.IO;
 	using System.Linq;
 	using System.Text;
-	using System.Threading;
 
 	using DevExpress.Xpf.Core.Serialization;
 	using DevExpress.Xpf.Docking;
@@ -47,14 +46,7 @@ namespace StockSharp.Designer.Layout
 		private readonly SynchronizedDictionary<IStudioControl, SettingsStorage> _dockingControlSettings = new SynchronizedDictionary<IStudioControl, SettingsStorage>();
 		private readonly SynchronizedSet<IStudioControl> _changedControls = new CachedSynchronizedSet<IStudioControl>();
 
-		private readonly TimeSpan _period = TimeSpan.FromSeconds(5);
-		private readonly object _syncRoot = new object();
-
-		private Timer _flushTimer;
-		private bool _isFlushing;
 		private bool _isLayoutChanged;
-		private bool _isDisposing;
-		private bool _isSettingsChanged;
 		private string _layout;
 
 		public DockLayoutManager DockingManager { get; }
@@ -107,7 +99,7 @@ namespace StockSharp.Designer.Layout
 				_panels.Add(content.Key, panel);
 				_controls.Add(content);
 
-				FlushSettings(content);
+				MarkControlChanged(content);
 			}
 
 			DockingManager.ActiveLayoutItem = panel;
@@ -132,7 +124,7 @@ namespace StockSharp.Designer.Layout
 				_panels.Add(content.Key, document);
 				_controls.Add(content);
 
-				FlushSettings(content);
+				MarkControlChanged(content);
 			}
 
 			DockingManager.ActiveLayoutItem = document;
@@ -192,6 +184,14 @@ namespace StockSharp.Designer.Layout
 		{
 			if (storage == null)
 				throw new ArgumentNullException(nameof(storage));
+
+			var items = _changedControls.CopyAndClear();
+			var isLayoutChanged = _isLayoutChanged;
+
+			_isLayoutChanged = false;
+
+			if (items.Length > 0 || isLayoutChanged)
+				Save(items, isLayoutChanged);
 
 			storage.SetValue("Controls", _dockingControlSettings.SyncGet(c => c.Select(p => p.Value).ToArray()));
 			storage.SetValue("Layout", _layout);
@@ -264,26 +264,10 @@ namespace StockSharp.Designer.Layout
 			return layout;
 		}
 
-		public void FlushSettings()
-		{
-			_isSettingsChanged = true;
-			Flush();
-		}
-
-		public void FlushSettings(IStudioControl control)
+		public void MarkControlChanged(IStudioControl control)
 		{
 			_changedControls.Add(control);
-			Flush();
-		}
-
-		protected override void DisposeManaged()
-		{
-			_isDisposing = true;
-
-			Save(DockingControls, true);
 			Changed.SafeInvoke();
-
-			base.DisposeManaged();
 		}
 
 		private void OnDockingManagerDockItemClosing(object sender, ItemCancelEventArgs e)
@@ -312,7 +296,7 @@ namespace StockSharp.Designer.Layout
 			_changedControls.Remove(control);
 			_dockingControlSettings.Remove(control);
 
-			Flush();
+			Changed.SafeInvoke();
 		}
 
 		private void DockingManager_DockItemEndDocking(object sender, DockItemDockingEventArgs e)
@@ -348,80 +332,7 @@ namespace StockSharp.Designer.Layout
 		private void OnDickingChanged()
 		{
 			_isLayoutChanged = true;
-			Flush();
-		}
-
-		private void Flush()
-		{
-			lock (_syncRoot)
-			{
-				if (_isFlushing || _flushTimer != null)
-					return;
-
-				_flushTimer = new Timer(OnFlush, null, _period, _period);
-			}
-		}
-
-		private void OnFlush(object state)
-		{
-			IStudioControl[] items;
-			bool isLayoutChanged;
-			bool isSettingsChanged;
-
-			lock (_syncRoot)
-			{
-				if (_isFlushing || _isDisposing)
-					return;
-
-				isLayoutChanged = _isLayoutChanged;
-				isSettingsChanged = _isSettingsChanged;
-				items = _changedControls.CopyAndClear();
-
-				_isFlushing = true;
-				_isLayoutChanged = false;
-				_isSettingsChanged = false;
-			}
-
-			try
-			{
-				var needSave = items.Length > 0 || isLayoutChanged;
-
-                if (needSave || isSettingsChanged)
-				{
-					if (needSave)
-					{
-						GuiDispatcher.GlobalDispatcher.AddSyncAction(() =>
-						{
-							if (_isDisposing)
-								return;
-
-							Save(items, isLayoutChanged);
-						});
-					}
-
-					Changed.SafeInvoke();
-				}
-				else
-				{
-					lock (_syncRoot)
-					{
-						if (_flushTimer == null)
-							return;
-
-						_flushTimer.Dispose();
-						_flushTimer = null;
-					}
-				}
-			}
-			catch (Exception excp)
-			{
-				this.AddErrorLog(excp, "Flush layout changed error.");
-			}
-			finally
-			{
-				lock (_syncRoot)
-					_isFlushing = false;
-			}
+			Changed.SafeInvoke();
 		}
 
 		private void Save(IEnumerable<IStudioControl> items, bool isLayoutChanged)

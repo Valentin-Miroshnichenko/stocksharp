@@ -17,7 +17,6 @@ namespace StockSharp.Designer
 {
 	using System;
 	using System.ComponentModel;
-	using System.Globalization;
 	using System.IO;
 	using System.Linq;
 	using System.Windows;
@@ -28,10 +27,6 @@ namespace StockSharp.Designer
 	using DevExpress.Xpf.Core;
 	using DevExpress.Xpf.Docking;
 	using DevExpress.Xpf.Docking.Base;
-	using DevExpress.Xpf.Editors.Helpers;
-	using DevExpress.Xpf.Editors.Internal;
-	using DevExpress.Xpf.Editors.Popups;
-	using DevExpress.Xpf.Editors.Settings;
 
 	using Ecng.Collections;
 	using Ecng.Common;
@@ -60,23 +55,6 @@ namespace StockSharp.Designer
 
 	public partial class MainWindow
 	{
-		sealed class PersistableService : IPersistableService
-		{
-			public bool ContainsKey(string key)
-			{
-				return false;
-			}
-
-			public TValue GetValue<TValue>(string key, TValue defaultValue = default(TValue))
-			{
-				return defaultValue;
-			}
-
-			public void SetValue(string key, object value)
-			{
-			}
-		}
-
 		public static RoutedCommand AddCommand = new RoutedCommand();
 		public static RoutedCommand OpenCommand = new RoutedCommand();
 		public static RoutedCommand RemoveCommand = new RoutedCommand();
@@ -94,15 +72,11 @@ namespace StockSharp.Designer
 		public static RoutedCommand ResetSettingsCommand = new RoutedCommand();
 		public static RoutedCommand AddNewSecurityCommand = new RoutedCommand();
 
-		private readonly string _settingsFile;
-
 		private StrategiesRegistry _strategiesRegistry;
 		private Connector _connector;
 		private LayoutManager _layoutManager;
 		private MarketDataSettingsCache _marketDataSettingsCache;
 		private EmulationSettings _emulationSettings;
-
-		private bool _isReseting;
 
 		private object ActiveLayoutContent => (DockingManager.ActiveLayoutItem as DocumentPanel)?.Content;
 		private object ActiveDockContent => (DockingManager.ActiveDockItem as DocumentPanel)?.Content;
@@ -111,16 +85,18 @@ namespace StockSharp.Designer
 
 		public MainWindow()
 		{
+			UserConfig.Instance.SuspendChangesMonitor();
+			UserConfig.Instance.SaveLayout = () => GuiDispatcher.GlobalDispatcher.AddSyncAction(() => _layoutManager.Save());
+
+			ConfigManager.RegisterService(UserConfig.Instance.CreateLogger());
 			ConfigManager.RegisterService<IStudioCommandService>(new StudioCommandService());
-			ConfigManager.RegisterService<IPersistableService>(new PersistableService());
+			ConfigManager.RegisterService<IPersistableService>(UserConfig.Instance);
 
 			InitializeComponent();
 			Title = TypeHelper.ApplicationNameWithVersion;
 
-			Directory.CreateDirectory(BaseApplication.AppDataPath);
-			_settingsFile = Path.Combine(BaseApplication.AppDataPath, "settings.xml");
+			ConfigManager.GetService<LogManager>().Listeners.Add(new GuiLogListener(Monitor));
 
-			InitializeLogManager();
 			InitializeLayoutManager();
 			InitializeDataSource();
 			InitializeMarketDataSettingsCache();
@@ -131,8 +107,9 @@ namespace StockSharp.Designer
 
 			SolutionExplorer.Compositions = _strategiesRegistry.Compositions;
 			SolutionExplorer.Strategies = _strategiesRegistry.Strategies;
-			//EmulationSecurityEditor.SecurityProvider = _connector;
-        }
+
+			ThemeManager.ApplicationThemeChanged += (s, e) => UserConfig.Instance.SetValue("ThemeName", ThemeManager.ApplicationThemeName);
+		}
 
 		private static void InitializeDataSource()
 		{
@@ -144,7 +121,7 @@ namespace StockSharp.Designer
 			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
 
 			cmdSvc.Register<OpenMarketDataSettingsCommand>(this, true, cmd => OpenMarketDataPanel(cmd.Settings));
-			cmdSvc.Register<ControlChangedCommand>(this, true, cmd => _layoutManager.FlushSettings(cmd.Control));
+			cmdSvc.Register<ControlChangedCommand>(this, true, cmd => _layoutManager.MarkControlChanged(cmd.Control));
 
 			cmdSvc.Register<RefreshSecurities>(this, false, cmd => ThreadingHelper
 				.Thread(() =>
@@ -245,8 +222,10 @@ namespace StockSharp.Designer
 
 			cmdSvc.Register<SetDefaultEmulationSettingsCommand>(this, false, cmd =>
 			{
-				_emulationSettings.Load(cmd.Settings.Save());
-				_layoutManager.FlushSettings();
+				var storage = cmd.Settings.Save();
+
+                _emulationSettings.Load(storage);
+				UserConfig.Instance.SetValue("EmulationSettings", storage);
 			});
 		}
 
@@ -262,7 +241,10 @@ namespace StockSharp.Designer
 			});
 			_marketDataSettingsCache.Settings.Add(MarketDataSettings.StockSharpSettings);
 
-			_marketDataSettingsCache.Changed += _layoutManager.FlushSettings;
+			_marketDataSettingsCache.Changed += () =>
+			{
+				UserConfig.Instance.SetValue("MarketDataSettingsCache", ((IPersistable)_marketDataSettingsCache).Save());
+			};
 
 			ConfigManager.RegisterService(_marketDataSettingsCache);
 		}
@@ -273,23 +255,6 @@ namespace StockSharp.Designer
 			{
 				MarketDataSettings = _marketDataSettingsCache.Settings.FirstOrDefault()
 			};
-		}
-
-		private void InitializeLogManager()
-		{
-			var logsPath = Path.Combine(BaseApplication.AppDataPath, "Logs");
-			var logManager = new LogManager();
-
-			logManager.Listeners.Add(new FileLogListener
-			{
-				Append = true,
-				LogDirectory = logsPath,
-				MaxLength = 1024 * 1024 * 100 /* 100mb */,
-				MaxCount = 10,
-				SeparateByDates = SeparateByDateModes.SubDirectories,
-			});
-			logManager.Listeners.Add(new GuiLogListener(Monitor));
-			ConfigManager.RegisterService(logManager);
 		}
 
 		private void InitializeConnector()
@@ -316,7 +281,7 @@ namespace StockSharp.Designer
 		private void InitializeLayoutManager()
 		{
 			_layoutManager = new LayoutManager(DockingManager, DocumentHost);
-			_layoutManager.Changed += SaveSettings;
+			_layoutManager.Changed += UserConfig.Instance.MarkLayoutChanged;
 			ConfigManager.GetService<LogManager>().Sources.Add(_layoutManager);
 			ConfigManager.RegisterService(_layoutManager);
 		}
@@ -339,7 +304,7 @@ namespace StockSharp.Designer
 			_sessionClient.CreateSession(Products.Designer);
 
 			LoadSettings();
-
+			
 			_connector.StorageAdapter.Load();
 		}
 
@@ -349,6 +314,7 @@ namespace StockSharp.Designer
 				control.CanClose();
 
 			_layoutManager.Dispose();
+			UserConfig.Instance.Dispose();
 
 			_sessionClient.CloseSession();
 		}
@@ -663,11 +629,7 @@ namespace StockSharp.Designer
 			if (res != MessageBoxResult.Yes)
 				return;
 
-			_isReseting = true;
-
-			ConfigManager.GetService<LogManager>().Dispose();
-			Directory.Delete(BaseApplication.AppDataPath, true);
-
+			UserConfig.Instance.ResetSettings();
 			Application.Current.Restart();
 		}
 
@@ -734,42 +696,15 @@ namespace StockSharp.Designer
 
 		private void LoadSettings()
 		{
-			if (!File.Exists(_settingsFile))
-				return;
+			var settings = UserConfig.Instance;
 
-			CultureInfo
-				.InvariantCulture
-				.DoInCulture(() =>
-				{
-					var settings = new XmlSerializer<SettingsStorage>().Deserialize(_settingsFile);
+			settings.TryLoadSettings<SettingsStorage>("MarketDataSettingsCache", s => _marketDataSettingsCache.Load(s));
+			settings.TryLoadSettings<SettingsStorage>("EmulationSettings", s => _emulationSettings.Load(s));
+			settings.TryLoadSettings<SettingsStorage>("Layout", s => _layoutManager.Load(s));
+			settings.TryLoadSettings<SettingsStorage>("Connector", s => _connector.Load(s));
+			settings.TryLoadSettings<string>("ThemeName", s => ThemeManager.ApplicationThemeName = s);
 
-					settings.TryLoadSettings<SettingsStorage>("MarketDataSettingsCache", s => _marketDataSettingsCache.Load(s));
-					settings.TryLoadSettings<SettingsStorage>("EmulationSettings", s => _emulationSettings.Load(s));
-					settings.TryLoadSettings<SettingsStorage>("Layout", s => _layoutManager.Load(s));
-					settings.TryLoadSettings<SettingsStorage>("Connector", s => _connector.Load(s));
-					settings.TryLoadSettings<string>("ThemeName", s => ThemeManager.ApplicationThemeName = s);
-				});
-		}
-
-		private void SaveSettings()
-		{
-			if (_isReseting)
-				return;
-
-			CultureInfo
-				.InvariantCulture
-				.DoInCulture(() =>
-				{
-					var settings = new SettingsStorage();
-
-					settings.SetValue("MarketDataSettingsCache", ((IPersistable)_marketDataSettingsCache).Save());
-					settings.SetValue("EmulationSettings", _emulationSettings.Save());
-					settings.SetValue("Layout", _layoutManager.Save());
-					settings.SetValue("Connector", _connector.Save());
-					settings.SetValue("ThemeName", ThemeManager.ApplicationThemeName);
-
-					new XmlSerializer<SettingsStorage>().Serialize(settings, _settingsFile);
-				});
+			settings.ResumeChangesMonitor();
 		}
 
 		private bool ConfigureConnector()
@@ -779,7 +714,7 @@ namespace StockSharp.Designer
 			if (!result)
 				return false;
 
-			_layoutManager.FlushSettings();
+			UserConfig.Instance.SetValue("Connector", _connector.Save());
 
 			return true;
 		}

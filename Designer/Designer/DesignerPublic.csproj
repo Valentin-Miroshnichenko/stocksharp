@@ -173,6 +173,7 @@
       <DependentUpon>SolutionExplorerControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StrategiesRegistry.cs" />
+    <Compile Include="UserConfig.cs" />
     <Page Include="DiagramDebuggerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

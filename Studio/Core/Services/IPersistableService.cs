@@ -19,9 +19,11 @@ namespace StockSharp.Studio.Core.Services
 	using System.Collections.Generic;
 	using System.Linq;
 
+	using Ecng.Configuration;
 	using Ecng.Serialization;
 
 	using StockSharp.Community;
+	using StockSharp.Logging;
 	using StockSharp.Xaml.Code;
 
 	public interface IPersistableService
@@ -104,6 +106,23 @@ namespace StockSharp.Studio.Core.Services
 				throw new ArgumentNullException(nameof(service));
 
 			service.SetValue("AutoConnect", autoConnect);
+		}
+
+		public static void TryLoadSettings<T>(this IPersistableService persistableService, string name, Action<T> load)
+		{
+			try
+			{
+				var settings = persistableService.GetValue<T>(name);
+
+				if (settings == null)
+					return;
+
+				load(settings);
+			}
+			catch (Exception excp)
+			{
+				ConfigManager.GetService<LogManager>().Application.AddErrorLog(excp);
+			}
 		}
 	}
 }
