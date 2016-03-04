@@ -55,8 +55,6 @@
 
 		private DiagramStrategy _strategy;
 
-		public override string Key => $"_{Strategy.Id.ToString("N")}";
-
 		public ICommand StartCommand { get; protected set; }
 
 		public ICommand StopCommand { get; protected set; }
@@ -163,6 +161,8 @@
 
 			if (_strategy == null)
 				return;
+
+			Key = $"_{_strategy.Id.ToString("N")}";
 
 			ConfigManager
 				.GetService<LogManager>()

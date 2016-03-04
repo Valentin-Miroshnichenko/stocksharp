@@ -16,7 +16,15 @@ Copyright 2010 by StockSharp, LLC
 namespace StockSharp.Designer
 {
 	using System;
+	using System.Windows.Media.Imaging;
 
+	using DevExpress.Xpf.Bars;
+	using DevExpress.Xpf.Ribbon;
+
+	using Ecng.ComponentModel;
+	using Ecng.Xaml;
+
+	using StockSharp.Studio.Core.Commands;
 	using StockSharp.Xaml.Diagram;
 
 	static class Extensions
@@ -27,6 +35,31 @@ namespace StockSharp.Designer
 				throw new ArgumentNullException(nameof(element));
 
 			return element.TypeId.ToString().Replace("-", "_") + ".xml";
+		}
+
+		public static void AddToolControl(this RibbonPageGroup page, Type type, object sender)
+		{
+			var id = type.GUID.ToString();
+
+			var mi = CreateRibbonButton(type);
+			mi.ItemClick += (s, e) => new OpenWindowCommand(id, type, false).Process(sender);
+
+			page.Items.Add(mi);
+		}
+
+		private static BarButtonItem CreateRibbonButton(Type type)
+		{
+			if (type == null)
+				throw new ArgumentNullException(nameof(type));
+
+			var iconUrl = type.GetIconUrl();
+
+			return new BarButtonItem
+			{
+				Content = type.GetDisplayName(),
+				ToolTip = type.GetDescription(),
+				LargeGlyph = iconUrl == null ? null : new BitmapImage(iconUrl)
+			};
 		}
 	}
 }

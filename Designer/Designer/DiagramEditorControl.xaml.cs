@@ -54,8 +54,6 @@ namespace StockSharp.Designer
 
 		#endregion
 
-		public override string Key => Composition.Key;
-
 		public bool IsChanged { get; set; }
 
 		public INotifyList<DiagramElement> PaletteElements
@@ -137,6 +135,8 @@ namespace StockSharp.Designer
 
 			if (newComposition != null)
 			{
+				Key = Composition.Key;
+
 				NoStrategyLabel.Visibility = Visibility.Hidden;
 				DiagramEditor.Composition = newComposition.Element;
 

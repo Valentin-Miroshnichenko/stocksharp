@@ -65,7 +65,6 @@ namespace StockSharp.Designer
 		public static RoutedCommand ConnectorSettingsCommand = new RoutedCommand();
 		public static RoutedCommand ConnectDisconnectCommand = new RoutedCommand();
 		public static RoutedCommand RefreshCompositionCommand = new RoutedCommand();
-		public static RoutedCommand OpenMarketDataSettingsCommand = new RoutedCommand();
 		public static RoutedCommand HelpCommand = new RoutedCommand();
 		public static RoutedCommand AboutCommand = new RoutedCommand();
 		public static RoutedCommand TargetPlatformCommand = new RoutedCommand();
@@ -122,6 +121,8 @@ namespace StockSharp.Designer
 
 			cmdSvc.Register<OpenMarketDataSettingsCommand>(this, true, cmd => OpenMarketDataPanel(cmd.Settings));
 			cmdSvc.Register<ControlChangedCommand>(this, true, cmd => _layoutManager.MarkControlChanged(cmd.Control));
+
+			#region RefreshSecurities
 
 			cmdSvc.Register<RefreshSecurities>(this, false, cmd => ThreadingHelper
 				.Thread(() =>
@@ -193,6 +194,10 @@ namespace StockSharp.Designer
 				})
 				.Launch());
 
+			#endregion
+
+			#region CreateSecurityCommand
+
 			cmdSvc.Register<CreateSecurityCommand>(this, true, cmd =>
 			{
 				var entityRegistry = ConfigManager.GetService<IEntityRegistry>();
@@ -220,6 +225,8 @@ namespace StockSharp.Designer
 				cmd.Security = wnd.Security;
 			});
 
+			#endregion
+
 			cmdSvc.Register<SetDefaultEmulationSettingsCommand>(this, false, cmd =>
 			{
 				var storage = cmd.Settings.Save();
@@ -227,6 +234,16 @@ namespace StockSharp.Designer
                 _emulationSettings.Load(storage);
 				UserConfig.Instance.SetValue("EmulationSettings", storage);
 			});
+			cmdSvc.Register<OpenWindowCommand>(this, true, cmd =>
+			{
+				var ctrl = cmd.CtrlType.CreateInstance<IStudioControl>();
+
+				if (cmd.IsToolWindow)
+					_layoutManager.OpenToolWindow(ctrl);
+				else
+					_layoutManager.OpenDocumentWindow(ctrl);
+			});
+			cmdSvc.Register<RequestBindSource>(this, true, cmd => new BindConnectorCommand(ConfigManager.GetService<IConnector>(), cmd.Control).SyncProcess(this));
 		}
 
 		private void InitializeMarketDataSettingsCache()
@@ -302,6 +319,9 @@ namespace StockSharp.Designer
 		private void MainWindow_OnLoaded(object sender, RoutedEventArgs e)
 		{
 			_sessionClient.CreateSession(Products.Designer);
+
+			foreach (var type in AppConfig.Instance.ToolControls)
+				RibbonToolControlsGroup.AddToolControl(type, this);
 
 			LoadSettings();
 			
@@ -566,16 +586,6 @@ namespace StockSharp.Designer
 
 			diagramEditor.Composition = null;
 			diagramEditor.Composition = composition;
-		}
-
-		private void OpenMarketDataSettingsCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = true;
-		}
-
-		private void OpenMarketDataSettingsCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			OpenMarketDataPanel(_marketDataSettingsCache.Settings.FirstOrDefault(s => s.Id != Guid.Empty));
 		}
 
 		private void HelpCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)

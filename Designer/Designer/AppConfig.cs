@@ -21,14 +21,18 @@ namespace StockSharp.Designer
 		public static AppConfig Instance => _instance ?? (_instance = new AppConfig());
 
 		private readonly CachedSynchronizedList<Type> _strategyControls = new CachedSynchronizedList<Type>();
+		private readonly CachedSynchronizedList<Type> _toolControls = new CachedSynchronizedList<Type>();
 
 		public IEnumerable<Type> StrategyControls => _strategyControls.Cache;
+
+		public IEnumerable<Type> ToolControls => _toolControls.Cache;
 
 		private AppConfig()
 		{
 			var section = ConfigManager.GetSection<DesignerSection>();
 
 			SafeAdd<ControlElement>(section.StrategyControls, elem => _strategyControls.Add(elem.Type.To<Type>()));
+			SafeAdd<ControlElement>(section.ToolControls, elem => _toolControls.Add(elem.Type.To<Type>()));
 		}
 
 		private static void SafeAdd<T1>(IEnumerable from, Action<T1> action)
