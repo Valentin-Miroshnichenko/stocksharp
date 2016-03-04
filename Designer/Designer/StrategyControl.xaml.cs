@@ -81,6 +81,7 @@
 			InitializeCommands();
 
 			_layoutManager = new LayoutManager(DockingManager);
+			_layoutManager.Changed += RaiseChangedCommand;
 
 			var cmdSvc = ConfigManager.GetService<IStudioCommandService>();
 			cmdSvc.Register<ControlChangedCommand>(this, false, cmd => RaiseChangedCommand());
