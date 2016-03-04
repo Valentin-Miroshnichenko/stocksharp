@@ -1,0 +1,300 @@
+<SettingsStorage>
+  <KeyValuePairBeginStringAndObjectEnd>
+    <key>Controls</key>
+    <value>
+      <Type type="string">Ecng.Serialization.SettingsStorage[], Ecng.Serialization</Type>
+      <Value type="Ecng.Serialization.SettingsStorage[], Ecng.Serialization">
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Designer.SolutionExplorerPanel, Designer</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Title</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">Schemas</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>Key</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">_9ec28cfe3b3546aeacb948231d5ff552</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ExplorerTree</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">﻿&lt;XtraSerializer version="1.0" application="Designer"&gt;
+  &lt;property name="#LayoutVersion" isnull="true" /&gt;
+  &lt;property name="$TreeListControl" iskey="true" value="TreeListControl"&gt;
+    &lt;property name="UseFieldNameForSerialization"&gt;true&lt;/property&gt;
+    &lt;property name="SortInfo" iskey="true" value="0" /&gt;
+    &lt;property name="TotalSummary" iskey="true" value="0" /&gt;
+    &lt;property name="Columns" iskey="true" value="3"&gt;
+      &lt;property name="Item1" isnull="true" iskey="true"&gt;
+        &lt;property name="GridRow"&gt;0&lt;/property&gt;
+        &lt;property name="FieldName"&gt;Name&lt;/property&gt;
+        &lt;property name="VisibleIndex"&gt;0&lt;/property&gt;
+        &lt;property name="ActualWidth"&gt;NaN&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item2" isnull="true" iskey="true"&gt;
+        &lt;property name="GridRow"&gt;0&lt;/property&gt;
+        &lt;property name="FieldName"&gt;Tooltip&lt;/property&gt;
+        &lt;property name="VisibleIndex"&gt;1&lt;/property&gt;
+        &lt;property name="ActualWidth"&gt;NaN&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item3" isnull="true" iskey="true"&gt;
+        &lt;property name="GridRow"&gt;0&lt;/property&gt;
+        &lt;property name="FieldName"&gt;Id&lt;/property&gt;
+        &lt;property name="VisibleIndex"&gt;2&lt;/property&gt;
+        &lt;property name="ActualWidth"&gt;NaN&lt;/property&gt;
+      &lt;/property&gt;
+    &lt;/property&gt;
+    &lt;property name="MRUFilters" iskey="true" value="0" /&gt;
+  &lt;/property&gt;
+&lt;/XtraSerializer&gt;</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+        <SettingsStorage>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>ControlType</key>
+            <value>
+              <Type type="string">string</Type>
+              <Value type="string">StockSharp.Studio.Controls.LogManagerPanel, StockSharp.Studio.Controls</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>IsToolWindow</key>
+            <value>
+              <Type type="string">bool</Type>
+              <Value type="bool">True</Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+          <KeyValuePairBeginStringAndObjectEnd>
+            <key>LogControl</key>
+            <value>
+              <Type type="string">Ecng.Serialization.SettingsStorage, Ecng.Serialization</Type>
+              <Value type="Ecng.Serialization.SettingsStorage, Ecng.Serialization">
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>AutoScroll</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">False</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>AutoResize</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">False</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowSourceNameColumn</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>MaxItemsCount</key>
+                  <value>
+                    <Type type="string">int</Type>
+                    <Value type="int">-1</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>TimeFormat</key>
+                  <value>
+                    <Type type="string">string</Type>
+                    <Value type="string">yy/MM/dd HH:mm:ss.fff</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowInfo</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowError</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowWarning</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+                <KeyValuePairBeginStringAndObjectEnd>
+                  <key>ShowDebug</key>
+                  <value>
+                    <Type type="string">bool</Type>
+                    <Value type="bool">True</Value>
+                  </value>
+                </KeyValuePairBeginStringAndObjectEnd>
+              </Value>
+            </value>
+          </KeyValuePairBeginStringAndObjectEnd>
+        </SettingsStorage>
+      </Value>
+    </value>
+  </KeyValuePairBeginStringAndObjectEnd>
+  <KeyValuePairBeginStringAndObjectEnd>
+    <key>Layout</key>
+    <value>
+      <Type type="string">string</Type>
+      <Value type="string">﻿&lt;XtraSerializer version="1.0" application="DockLayoutManager"&gt;
+  &lt;property name="#LayoutVersion" isnull="true" /&gt;
+  &lt;property name="$DockLayoutManager" iskey="true" value="DockLayoutManager"&gt;
+    &lt;property name="ManualClosedPanelsBarVisibility"&gt;false&lt;/property&gt;
+    &lt;property name="FloatingMode"&gt;Desktop&lt;/property&gt;
+    &lt;property name="Items" iskey="true" value="11"&gt;
+      &lt;property name="Item1" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="Orientation"&gt;Vertical&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;Root&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item2" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="Orientation"&gt;Horizontal&lt;/property&gt;
+        &lt;property name="ItemHeight"&gt;1.45662100456621*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;Root&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem5&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item3" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="ItemWidth"&gt;0.455882352941176*&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;476,858&lt;/property&gt;
+        &lt;property name="IsActive"&gt;true&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem5&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="Name"&gt;_9ec28cfe3b3546aeacb948231d5ff552&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item4" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="Orientation"&gt;Vertical&lt;/property&gt;
+        &lt;property name="ItemWidth"&gt;3.54411764705882*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem5&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem1&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item5" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="Orientation"&gt;Horizontal&lt;/property&gt;
+        &lt;property name="ItemHeight"&gt;3*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem1&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem2&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item6" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="DestroyOnClosingChildren"&gt;false&lt;/property&gt;
+        &lt;property name="ItemWidth"&gt;3*&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem2&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem3&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item7" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;LayoutGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem3&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;dockItem4&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item8" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="DestroyOnClosingChildren"&gt;false&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;DocumentGroup&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem4&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="Name"&gt;DocumentHost&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item9" isnull="true" iskey="true"&gt;
+        &lt;property name="DockType"&gt;Bottom&lt;/property&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;AutoHideGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName"&gt;$AutoHideGroups&lt;/property&gt;
+        &lt;property name="Name"&gt;dockItem6&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item10" isnull="true" iskey="true"&gt;
+        &lt;property name="DockType"&gt;Bottom&lt;/property&gt;
+        &lt;property name="SerializableSelectedTabPageIndex"&gt;-1&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="0" /&gt;
+        &lt;property name="TypeName"&gt;AutoHideGroup&lt;/property&gt;
+        &lt;property name="ParentName" isnull="true" /&gt;
+        &lt;property name="ParentCollectionName"&gt;$AutoHideGroups&lt;/property&gt;
+        &lt;property name="Name"&gt;dockItem7&lt;/property&gt;
+      &lt;/property&gt;
+      &lt;property name="Item11" isnull="true" iskey="true"&gt;
+        &lt;property name="SerializableFloatingBounds"&gt;0,0,0,0&lt;/property&gt;
+        &lt;property name="SerializableFloatingOffset"&gt;0,0&lt;/property&gt;
+        &lt;property name="ItemHeight"&gt;0.54337899543379*&lt;/property&gt;
+        &lt;property name="FloatSize"&gt;380,880&lt;/property&gt;
+        &lt;property name="IsActive"&gt;false&lt;/property&gt;
+        &lt;property name="SerializableDockSituation" iskey="true" value="1"&gt;
+          &lt;property name="Item1" isnull="true" iskey="true"&gt;
+            &lt;property name="DockState"&gt;Docked&lt;/property&gt;
+            &lt;property name="ParentName"&gt;Root&lt;/property&gt;
+            &lt;property name="OwnerName"&gt;_f97dcb8b21044df3b6c5cbb2b8b3b704&lt;/property&gt;
+            &lt;property name="Index"&gt;1&lt;/property&gt;
+          &lt;/property&gt;
+        &lt;/property&gt;
+        &lt;property name="TypeName"&gt;LayoutPanel&lt;/property&gt;
+        &lt;property name="ParentName"&gt;dockItem7&lt;/property&gt;
+        &lt;property name="ParentCollectionName" isnull="true" /&gt;
+        &lt;property name="ShowCloseButton"&gt;true&lt;/property&gt;
+        &lt;property name="AutoHideGroup.AutoHideSize" OwnerType="DevExpress.Xpf.Docking.AutoHideGroup" DependencyPropertyType="System.Windows.Size"&gt;150,246&lt;/property&gt;
+        &lt;property name="AutoHideGroup.SizeToContent" OwnerType="DevExpress.Xpf.Docking.AutoHideGroup" DependencyPropertyType="System.Windows.SizeToContent"&gt;Manual&lt;/property&gt;
+        &lt;property name="Name"&gt;_f97dcb8b21044df3b6c5cbb2b8b3b704&lt;/property&gt;
+      &lt;/property&gt;
+    &lt;/property&gt;
+    &lt;property name="DockingStyle"&gt;VS2010&lt;/property&gt;
+    &lt;property name="FloatingDocumentContainer"&gt;DocumentHost&lt;/property&gt;
+    &lt;property name="RestoreLayoutOptions.FloatPanelsRestoreOffset" OwnerType="DevExpress.Xpf.Docking.RestoreLayoutOptions" DependencyPropertyType="System.Windows.Point"&gt;4,152&lt;/property&gt;
+  &lt;/property&gt;
+&lt;/XtraSerializer&gt;</Value>
+    </value>
+  </KeyValuePairBeginStringAndObjectEnd>
+</SettingsStorage>

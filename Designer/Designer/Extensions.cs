@@ -16,9 +16,15 @@ Copyright 2010 by StockSharp, LLC
 namespace StockSharp.Designer
 {
 	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Text;
+	using System.Windows;
 	using System.Windows.Media.Imaging;
 
 	using DevExpress.Xpf.Bars;
+	using DevExpress.Xpf.Core.Serialization;
 	using DevExpress.Xpf.Ribbon;
 
 	using Ecng.ComponentModel;
@@ -37,29 +43,65 @@ namespace StockSharp.Designer
 			return element.TypeId.ToString().Replace("-", "_") + ".xml";
 		}
 
-		public static void AddToolControl(this RibbonPageGroup page, Type type, object sender)
+		public static void AddToolControl(this RibbonPageGroup page, ControlType controlType, object sender)
 		{
-			var id = type.GUID.ToString();
+			if (page == null)
+				throw new ArgumentNullException(nameof(page));
 
-			var mi = CreateRibbonButton(type);
-			mi.ItemClick += (s, e) => new OpenWindowCommand(id, type, false).Process(sender);
+			if (controlType == null)
+				throw new ArgumentNullException(nameof(controlType));
+
+			if (sender == null)
+				throw new ArgumentNullException(nameof(sender));
+
+			var type = controlType.Type;
+			var id = type.GUID.ToString();
+			var isToolWindow = controlType.IsToolWindow;
+
+			var mi = new BarButtonItem
+			{
+				Content = controlType.Name,
+				ToolTip = controlType.Description,
+				LargeGlyph = controlType.Icon == null ? null : new BitmapImage(controlType.Icon)
+			};
+			mi.ItemClick += (s, e) => new OpenWindowCommand(id, type, isToolWindow).Process(sender);
 
 			page.Items.Add(mi);
 		}
 
-		private static BarButtonItem CreateRibbonButton(Type type)
+		public static string SaveDevExpressControl(this DependencyObject obj)
 		{
-			if (type == null)
-				throw new ArgumentNullException(nameof(type));
+			if (obj == null)
+				throw new ArgumentNullException(nameof(obj));
 
-			var iconUrl = type.GetIconUrl();
-
-			return new BarButtonItem
+			using (var stream = new MemoryStream())
 			{
-				Content = type.GetDisplayName(),
-				ToolTip = type.GetDescription(),
-				LargeGlyph = iconUrl == null ? null : new BitmapImage(iconUrl)
-			};
+				DXSerializer.Serialize(obj, stream, "Designer", null);
+				return Encoding.UTF8.GetString(stream.ToArray());
+			}
+		}
+
+		public static void LoadDevExpressControl(this DependencyObject obj, string settings)
+		{
+			if (obj == null)
+				throw new ArgumentNullException(nameof(obj));
+
+			if (settings == null)
+				throw new ArgumentNullException(nameof(settings));
+
+			var data = Encoding.UTF8.GetBytes(settings);
+
+			using (var stream = new MemoryStream(data))
+			{
+				DXSerializer.Deserialize(obj, stream, "Designer", null);
+			}
+		}
+
+		public static IEnumerable<ControlType> GetControlTypes(this IEnumerable<Type> types)
+		{
+			return types
+				.Select(type => new ControlType(type))
+				.ToArray();
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace StockSharp.Studio.Controls
 	using System.Windows.Controls;
 	using System.Runtime.InteropServices;
 
+	using Ecng.ComponentModel;
 	using Ecng.Configuration;
 	using Ecng.Serialization;
 
@@ -30,6 +31,8 @@ namespace StockSharp.Studio.Controls
 
 	[DisplayNameLoc(LocalizedStrings.Str3237Key)]
 	[Guid("F97DCB8B-2104-4DF3-B6C5-CBB2B8B3B704")]
+	[Icon("images/log_24x24.png")]
+	[DockingWindowType(true)]
 	public class LogManagerPanel : BaseStudioControl
 	{
 		private readonly Monitor _monitor = new Monitor();

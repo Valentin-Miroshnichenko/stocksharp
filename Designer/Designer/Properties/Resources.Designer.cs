@@ -120,6 +120,26 @@ namespace StockSharp.Designer.Properties {
         ///            &lt;key&gt;ControlType&lt;/key&gt;
         ///            &lt;value&gt;
         ///              &lt;Type type=&quot;string&quot;&gt;string&lt;/Type&gt;
+        ///              &lt;Value type=&quot;string&quot;&gt;StockSharp.Designer.Solutio [остаток строки не уместился]&quot;;.
+        /// </summary>
+        internal static string DefaultAppLayout {
+            get {
+                return ResourceManager.GetString("DefaultAppLayout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на &lt;SettingsStorage&gt;
+        ///  &lt;KeyValuePairBeginStringAndObjectEnd&gt;
+        ///    &lt;key&gt;Controls&lt;/key&gt;
+        ///    &lt;value&gt;
+        ///      &lt;Type type=&quot;string&quot;&gt;Ecng.Serialization.SettingsStorage[], Ecng.Serialization&lt;/Type&gt;
+        ///      &lt;Value type=&quot;Ecng.Serialization.SettingsStorage[], Ecng.Serialization&quot;&gt;
+        ///        &lt;SettingsStorage&gt;
+        ///          &lt;KeyValuePairBeginStringAndObjectEnd&gt;
+        ///            &lt;key&gt;ControlType&lt;/key&gt;
+        ///            &lt;value&gt;
+        ///              &lt;Type type=&quot;string&quot;&gt;string&lt;/Type&gt;
         ///              &lt;Value type=&quot;string&quot;&gt;StockSharp.Studio.Controls. [остаток строки не уместился]&quot;;.
         /// </summary>
         internal static string DefaultStrategyLayout {

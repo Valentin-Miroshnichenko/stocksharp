@@ -32,18 +32,18 @@
 			if (this.IsDesignMode())
 				return;
 
-			ControlTypes = AppConfig.Instance.GetControlTypes();
+			ControlTypes = AppConfig.Instance.StrategyControls.GetControlTypes();
 		}
 
 		private void Gallery_OnItemClick(object sender, GalleryItemEventArgs e)
 		{
 			var type = e.Item.DataContext as ControlType;
-			var ctrl = DataContext as StrategyControl;
+			var ctrl = DataContext as StrategyPanel;
 
 			if (type == null || ctrl == null)
 				return;
 
-			new OpenWindowCommand(Guid.NewGuid().To<string>(), type.Item1, true).SyncProcess(ctrl.Strategy);
+			new OpenWindowCommand(Guid.NewGuid().To<string>(), type.Type, true).SyncProcess(ctrl.Strategy);
 		}
 
 		private void SaveLayout_OnItemClick(object sender, ItemClickEventArgs e)
@@ -60,7 +60,7 @@
 
 			var cmd = new SaveLayoutCommand();
 
-			cmd.SyncProcess(((StrategyControl)DataContext).Strategy);
+			cmd.SyncProcess(((StrategyPanel)DataContext).Strategy);
 
 			if (!cmd.Layout.IsEmpty())
 				File.WriteAllText(dlg.FileName, cmd.Layout);
@@ -80,7 +80,7 @@
 
 			var data = File.ReadAllText(dlg.FileName);
 
-			new LoadLayoutCommand(data).SyncProcess(((StrategyControl)DataContext).Strategy);
+			new LoadLayoutCommand(data).SyncProcess(((StrategyPanel)DataContext).Strategy);
 		}
 	}
 }

@@ -19,17 +19,7 @@
         UseLayoutRounding="True" DisplayShowModeSelector="True">
 
     <Window.CommandBindings>
-        <CommandBinding Command="{x:Static local:MainWindow.AddCommand}"
-						CanExecute="AddCommand_OnCanExecute"
-						Executed="AddCommand_OnExecuted"/>
-
-        <CommandBinding Command="{x:Static local:MainWindow.OpenCommand}"
-						CanExecute="OpenCommand_OnCanExecute"
-						Executed="OpenCommand_OnExecuted"/>
-
-        <CommandBinding Command="{x:Static local:MainWindow.RemoveCommand}"
-						CanExecute="RemoveCommand_OnCanExecute"
-						Executed="RemoveCommand_OnExecuted"/>
+        
 
         <CommandBinding Command="{x:Static local:MainWindow.SaveCommand}"
 						CanExecute="SaveCommand_OnCanExecute"
@@ -121,48 +111,7 @@
                 </dxr:RibbonControl.ToolbarItems>
 				
                 <dxr:RibbonDefaultPageCategory>
-                    <dxr:RibbonPage x:Name="RibbonCommonTab" Caption="{x:Static localization:LocalizedStrings.Schemas}">
-                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.CompositionElementsStrategies}">
-                            <dxb:BarSubItem Content="{x:Static localization:LocalizedStrings.Str3229}"
-													Glyph="pack://application:,,,/Designer;component/Images/Add_32x32.png">
-                                <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.CompositeElement}"
-												   Command="{x:Static local:MainWindow.AddCommand}"
-												   CommandParameter="{x:Static local:CompositionType.Composition}" />
-                                <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Strategy}"
-												   Command="{x:Static local:MainWindow.AddCommand}"
-												   CommandParameter="{x:Static local:CompositionType.Strategy}" />
-                            </dxb:BarSubItem>
-
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str1509}"
-											   Glyph="pack://application:,,,/Designer;component/Images/Open_32x32.png"
-											   Command="{x:Static local:MainWindow.OpenCommand}"
-											   CommandParameter="{Binding ElementName=SolutionExplorer, Path=SelectedItem}"/>
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str2060}"
-											   Glyph="pack://application:,,,/Designer;component/Images/Remove_32x32.png"
-											   Command="{x:Static local:MainWindow.RemoveCommand}"
-											   CommandParameter="{Binding ElementName=SolutionExplorer, Path=SelectedItem}"/>
-
-                            <dxb:BarItemLinkSeparator/>
-
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Import}"
-											   IsEnabled="False"
-											   Glyph="pack://application:,,,/Designer;component/Images/Open_32x32.png" />
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Export}"
-											   IsEnabled="False"
-											   Glyph="pack://application:,,,/Designer;component/Images/Save_32x32.png" />
-
-                            <dxb:BarItemLinkSeparator/>
-							
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str1174}"
-										   LargeGlyph="pack://application:,,,/Designer;component/Images/Backtesting_32x32.png" 
-										   Command="{x:Static local:MainWindow.EmulateStrategyCommand}"
-										   CommandParameter="{Binding ElementName=SolutionExplorer, Path=SelectedItem}" />
-                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str3176}"
-										   LargeGlyph="pack://application:,,,/Designer;component/Images/terminal_32x32.png" 
-										   Command="{x:Static local:MainWindow.ExecuteStrategyCommand}"
-										   CommandParameter="{Binding ElementName=SolutionExplorer, Path=SelectedItem}" />
-                        </dxr:RibbonPageGroup>
-
+                    <dxr:RibbonPage x:Name="RibbonCommonTab" Caption="{x:Static localization:LocalizedStrings.Str1559}">
                         <dxr:RibbonPageGroup x:Name="RibbonToolControlsGroup" Caption="{x:Static localization:LocalizedStrings.XamlStr252}">
                             <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.XamlStr137}"
 										   LargeGlyph="pack://application:,,,/Designer;component/Images/Security_32x32.png" 
@@ -202,6 +151,58 @@
                                     </dxb:BarSplitButtonItem>
                                 </dxr:RibbonGalleryBarItem.DropDownMenuItems>
                             </dxr:RibbonGalleryBarItem>
+                        </dxr:RibbonPageGroup>
+                    </dxr:RibbonPage>
+                    
+					<dxr:RibbonPage x:Name="RibbonSchemasTab" Caption="{x:Static localization:LocalizedStrings.Schemas}">
+                        <dxr:RibbonPage.Resources>
+                            <Style TargetType="{x:Type dxb:BarButtonItem}">
+                                <Style.Triggers>
+                                    <Trigger Property="Command" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </dxr:RibbonPage.Resources>
+                        <dxr:RibbonPageGroup Caption="{x:Static localization:LocalizedStrings.CompositionElementsStrategies}">
+                            <dxb:BarSubItem Content="{x:Static localization:LocalizedStrings.Str3229}"
+													Glyph="pack://application:,,,/Designer;component/Images/Add_32x32.png">
+                                <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.CompositeElement}"
+												   Command="{Binding AddCommand}"
+												   CommandParameter="{x:Static local:CompositionType.Composition}" />
+                                <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Strategy}"
+												   Command="{Binding AddCommand}"
+												   CommandParameter="{x:Static local:CompositionType.Strategy}" />
+                            </dxb:BarSubItem>
+
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str1509}"
+											   Glyph="pack://application:,,,/Designer;component/Images/Open_32x32.png"
+											   Command="{Binding OpenCommand}"
+											   CommandParameter="{Binding SelectedItem}"/>
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str2060}"
+											   Glyph="pack://application:,,,/Designer;component/Images/Remove_32x32.png"
+											   Command="{Binding RemoveCommand}"
+											   CommandParameter="{Binding SelectedItem}"/>
+
+                            <dxb:BarItemLinkSeparator/>
+
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Import}"
+											   IsEnabled="False"
+											   Glyph="pack://application:,,,/Designer;component/Images/Open_32x32.png" />
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Export}"
+											   IsEnabled="False"
+											   Glyph="pack://application:,,,/Designer;component/Images/Save_32x32.png" />
+
+                            <dxb:BarItemLinkSeparator/>
+							
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str1174}"
+										   LargeGlyph="pack://application:,,,/Designer;component/Images/Backtesting_32x32.png" 
+										   Command="{Binding EmulateStrategyCommand}"
+										   CommandParameter="{Binding SelectedItem}" />
+                            <dxb:BarButtonItem Content="{x:Static localization:LocalizedStrings.Str3176}"
+										   LargeGlyph="pack://application:,,,/Designer;component/Images/terminal_32x32.png" 
+										   Command="{Binding ExecuteStrategyCommand}"
+										   CommandParameter="{Binding SelectedItem}" />
                         </dxr:RibbonPageGroup>
                     </dxr:RibbonPage>
 
@@ -410,18 +411,22 @@
 									DockItemActivated="DockingManager_OnDockItemActivated"
 									DockItemClosed="DockingManager_OnDockItemClosed"
 									FloatingDocumentContainer="DocumentHost">
-				
+
                 <dxdo:LayoutGroup Name="Root">
+                    <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False" />
+                </dxdo:LayoutGroup>
+				
+                <!--<dxdo:LayoutGroup Name="Root">
                     <dxdo:LayoutGroup Orientation="Vertical" ItemWidth="3*">
                         <dxdo:LayoutGroup Orientation="Horizontal" ItemHeight="3*">
-                            <dxdo:LayoutGroup DestroyOnClosingChildren="False" ItemWidth="200">
+                            --><!--<dxdo:LayoutGroup DestroyOnClosingChildren="False" ItemWidth="200">
                                 <dxdo:LayoutPanel x:Name="SolutionExplorerPanel" 
 												  Caption="{x:Static localization:LocalizedStrings.Schemas}" 
 												  AllowClose="False">
-                                    <local:SolutionExplorerControl x:Name="SolutionExplorer" 
+                                    <local:SolutionExplorerPanel x:Name="SolutionExplorer" 
 																   Open="SolutionExplorer_OnOpen"/>
                                 </dxdo:LayoutPanel>
-                            </dxdo:LayoutGroup>
+                            </dxdo:LayoutGroup>--><!--
                             <dxdo:LayoutGroup ItemWidth="3*" DestroyOnClosingChildren="False">
                                 <dxdo:LayoutGroup>
                                     <dxdo:DocumentGroup Name="DocumentHost" DestroyOnClosingChildren="False" />
@@ -429,9 +434,9 @@
                             </dxdo:LayoutGroup>
                         </dxdo:LayoutGroup>
                     </dxdo:LayoutGroup>
-                </dxdo:LayoutGroup>
+                </dxdo:LayoutGroup>-->
 				
-                <dxdo:DockLayoutManager.AutoHideGroups>
+                <!--<dxdo:DockLayoutManager.AutoHideGroups>
                     <dxdo:AutoHideGroup DockType="Bottom">
                         <dxdo:LayoutPanel x:Name="MonitorPanel" 
 										  Caption="{x:Static localization:LocalizedStrings.Str3237}" 
@@ -439,7 +444,7 @@
                             <xaml:Monitor x:Name="Monitor"/>
                         </dxdo:LayoutPanel>
                     </dxdo:AutoHideGroup>
-                </dxdo:DockLayoutManager.AutoHideGroups>
+                </dxdo:DockLayoutManager.AutoHideGroups>-->
             </dxdo:DockLayoutManager>
         </Grid>
     </dxb:BarManager>

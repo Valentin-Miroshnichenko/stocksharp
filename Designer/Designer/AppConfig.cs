@@ -13,6 +13,7 @@ namespace StockSharp.Designer
 
 	using StockSharp.Designer.Configuration;
 	using StockSharp.Logging;
+	using StockSharp.Studio.Controls;
 
 	public class AppConfig
 	{
@@ -49,23 +50,39 @@ namespace StockSharp.Designer
 				}
 			}
 		}
-
-		public IEnumerable<ControlType> GetControlTypes()
-		{
-			return StrategyControls
-				.Select(type => new ControlType(type,
-					type.GetDisplayName(),
-					type.GetDescription(),
-					type.GetIconUrl()))
-				.ToArray();
-		}
 	}
 
-	public class ControlType : Tuple<Type, string, string, Uri>
+	public class ControlType
 	{
-		public ControlType(Type item1, string item2, string item3, Uri item4)
-			: base(item1, item2, item3, item4)
+		public Type Type { get; }
+
+		public string Name { get; }
+
+		public string Description { get; }
+
+		public Uri Icon { get; }
+
+		public bool IsToolWindow { get; }
+
+		public ControlType(Type type)
+			: this(type, type.GetDisplayName(), type.GetDescription(), type.GetIconUrl())
 		{
+			var attr = type.GetAttribute<DockingWindowTypeAttribute>();
+			IsToolWindow = attr != null && attr.IsToolWindow;
+		}
+
+		public ControlType(Type type, string name, string description, Uri icon)
+		{
+			if (type == null)
+				throw new ArgumentNullException(nameof(type));
+
+			if (name == null)
+				throw new ArgumentNullException(nameof(name));
+
+			Type = type;
+			Name = name;
+			Description = description;
+			Icon = icon;
 		}
 	}
 }

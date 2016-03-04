@@ -15,7 +15,7 @@
                 <dxb:GalleryItemGroup.ItemTemplate>
                     <DataTemplate>
                         <ContentControl>
-                            <dxb:GalleryItem Caption="{Binding Item2}" ToolTip="{Binding Item3}" Glyph="{Binding Item4}"/>
+                            <dxb:GalleryItem Caption="{Binding Name}" ToolTip="{Binding Description}" Glyph="{Binding Icon}"/>
                         </ContentControl>
                     </DataTemplate>
                 </dxb:GalleryItemGroup.ItemTemplate>
@@ -32,7 +32,7 @@
                 <dxb:GalleryItemGroup.ItemTemplate>
                     <DataTemplate>
                         <ContentControl>
-                            <dxb:GalleryItem Caption="{Binding Item2}" ToolTip="{Binding Item3}" Glyph="{Binding Item4}"/>
+                            <dxb:GalleryItem Caption="{Binding Name}" ToolTip="{Binding Description}" Glyph="{Binding Icon}"/>
                         </ContentControl>
                     </DataTemplate>
                 </dxb:GalleryItemGroup.ItemTemplate>

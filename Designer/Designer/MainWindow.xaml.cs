@@ -55,9 +55,6 @@ namespace StockSharp.Designer
 
 	public partial class MainWindow
 	{
-		public static RoutedCommand AddCommand = new RoutedCommand();
-		public static RoutedCommand OpenCommand = new RoutedCommand();
-		public static RoutedCommand RemoveCommand = new RoutedCommand();
 		public static RoutedCommand SaveCommand = new RoutedCommand();
 		public static RoutedCommand DiscardCommand = new RoutedCommand();
 		public static RoutedCommand EmulateStrategyCommand = new RoutedCommand();
@@ -77,8 +74,7 @@ namespace StockSharp.Designer
 		private MarketDataSettingsCache _marketDataSettingsCache;
 		private EmulationSettings _emulationSettings;
 
-		private object ActiveLayoutContent => (DockingManager.ActiveLayoutItem as DocumentPanel)?.Content;
-		private object ActiveDockContent => (DockingManager.ActiveDockItem as DocumentPanel)?.Content;
+		private object ActiveLayoutContent => (DockingManager.ActiveLayoutItem as LayoutPanel)?.Content;
 
 		private readonly SessionClient _sessionClient = new SessionClient();
 
@@ -94,8 +90,6 @@ namespace StockSharp.Designer
 			InitializeComponent();
 			Title = TypeHelper.ApplicationNameWithVersion;
 
-			ConfigManager.GetService<LogManager>().Listeners.Add(new GuiLogListener(Monitor));
-
 			InitializeLayoutManager();
 			InitializeDataSource();
 			InitializeMarketDataSettingsCache();
@@ -103,9 +97,6 @@ namespace StockSharp.Designer
 			InitializeCommands();
 			InitializeConnector();
 			InitializeStrategiesRegistry();
-
-			SolutionExplorer.Compositions = _strategiesRegistry.Compositions;
-			SolutionExplorer.Strategies = _strategiesRegistry.Strategies;
 
 			ThemeManager.ApplicationThemeChanged += (s, e) => UserConfig.Instance.SetValue("ThemeName", ThemeManager.ApplicationThemeName);
 		}
@@ -243,6 +234,40 @@ namespace StockSharp.Designer
 				else
 					_layoutManager.OpenDocumentWindow(ctrl);
 			});
+			cmdSvc.Register<OpenBacktestingCommand>(this, true, cmd => OpenEmulation(cmd.Element));
+			cmdSvc.Register<OpenLiveCommand>(this, true, cmd => OpenLive(cmd.Element));
+
+			cmdSvc.Register<AddCompositionCommand>(this, true, cmd =>
+			{
+				var element = new CompositionDiagramElement
+				{
+					Name = "New " + cmd.Type.ToString().ToLower()
+				};
+				var item = new CompositionItem(cmd.Type, element);
+
+				_strategiesRegistry.Save(item);
+
+				OpenComposition(item);
+			});
+			cmdSvc.Register<OpenCompositionCommand>(this, true, cmd => OpenComposition(cmd.Element));
+			cmdSvc.Register<RemoveCompositionCommand>(this, true, cmd =>
+			{
+				var item = cmd.Element;
+
+				var control = _layoutManager
+					.DockingControls
+					.OfType<DiagramEditorControl>()
+					.FirstOrDefault(c => c.Key.CompareIgnoreCase(item.Key));
+
+				if (control != null)
+				{
+					control.ResetIsChanged();
+					_layoutManager.CloseWindow(control);
+				}
+
+				_strategiesRegistry.Remove(item);
+			});
+			
 			cmdSvc.Register<RequestBindSource>(this, true, cmd => new BindConnectorCommand(ConfigManager.GetService<IConnector>(), cmd.Control).SyncProcess(this));
 		}
 
@@ -320,7 +345,7 @@ namespace StockSharp.Designer
 		{
 			_sessionClient.CreateSession(Products.Designer);
 
-			foreach (var type in AppConfig.Instance.ToolControls)
+			foreach (var type in AppConfig.Instance.ToolControls.GetControlTypes())
 				RibbonToolControlsGroup.AddToolControl(type, this);
 
 			LoadSettings();
@@ -339,24 +364,19 @@ namespace StockSharp.Designer
 			_sessionClient.CloseSession();
 		}
 
-		private void SolutionExplorer_OnOpen(CompositionItem element)
-		{
-			OpenComposition(element);
-		}
-
 		private void DockingManager_OnLayoutItemActivated(object sender, LayoutItemActivatedEventArgs ea)
 		{
-			DockItemActivated(ActiveLayoutContent);
+			DockItemActivated((ea.Item as LayoutPanel)?.Content);
 		}
 
 		private void DockingManager_OnDockItemActivated(object sender, DockItemActivatedEventArgs ea)
 		{
-			DockItemActivated(ActiveDockContent);
+			DockItemActivated((ea.Item as LayoutPanel)?.Content);
 		}
 
 		private void DockingManager_OnDockItemClosed(object sender, DockItemClosedEventArgs e)
 		{
-			DockItemActivated(ActiveDockContent);
+			DockItemActivated(ActiveLayoutContent);
 		}
 
 		private void ConnectorOnConnectionStateChanged()
@@ -391,87 +411,15 @@ namespace StockSharp.Designer
 
 		#region Commands
 
-		private void AddCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			var item = e.OriginalSource as TreeViewItem;
-
-			if (item != null)
-			{
-				var solutionExplorerItem = item.Header as SolutionExplorerItem;
-				e.CanExecute = solutionExplorerItem?.Parent == null;
-			}
-			else
-				e.CanExecute = true;
-		}
-
-		private void AddCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			var type = (CompositionType)e.Parameter;
-
-			var element = new CompositionDiagramElement
-			{
-				Name = "New " + type.ToString().ToLower()
-			};
-			var item = new CompositionItem(type, element);
-
-			_strategiesRegistry.Save(item);
-
-			OpenComposition(item);
-		}
-
-		private void OpenCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = e.Parameter is CompositionItem;
-		}
-
-		private void OpenCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			OpenComposition((CompositionItem)e.Parameter);
-		}
-
-		private void RemoveCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = e.Parameter is CompositionItem;
-		}
-
-		private void RemoveCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			var item = (CompositionItem)e.Parameter;
-
-			var res = new MessageBoxBuilder()
-				.Owner(this)
-				.Caption(Title)
-				.Text(LocalizedStrings.Str2884Params.Put(item.Element.Name))
-				.Button(MessageBoxButton.YesNo)
-				.Icon(MessageBoxImage.Question)
-				.Show();
-
-			if (res != MessageBoxResult.Yes)
-				return;
-
-			var control = _layoutManager
-				.DockingControls
-				.OfType<DiagramEditorControl>()
-				.FirstOrDefault(c => c.Key.CompareIgnoreCase(item.Key));
-
-			if (control != null)
-			{
-				control.ResetIsChanged();
-				_layoutManager.CloseWindow(control);
-			}
-
-			_strategiesRegistry.Remove(item);
-		}
-
 		private void SaveCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-			var diagramEditor = ActiveDockContent as DiagramEditorControl;
+			var diagramEditor = ActiveLayoutContent as DiagramEditorControl;
 			e.CanExecute = diagramEditor != null && diagramEditor.IsChanged;
 		}
 
 		private void SaveCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
 		{
-			var diagramEditor = (DiagramEditorControl)ActiveDockContent;
+			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
 			var item = diagramEditor.Composition;
 
 			_strategiesRegistry.Save(item);
@@ -481,13 +429,13 @@ namespace StockSharp.Designer
 
 		private void DiscardCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-			var diagramEditor = ActiveDockContent as DiagramEditorControl;
+			var diagramEditor = ActiveLayoutContent as DiagramEditorControl;
 			e.CanExecute = diagramEditor != null && diagramEditor.IsChanged;
 		}
 
 		private void DiscardCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
 		{
-			var diagramEditor = (DiagramEditorControl)ActiveDockContent;
+			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
 			var composition = diagramEditor.Composition;
 
 			_strategiesRegistry.Discard(composition);
@@ -574,12 +522,12 @@ namespace StockSharp.Designer
 
 		private void RefreshCompositionCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
-			e.CanExecute = ActiveDockContent is DiagramEditorControl;
+			e.CanExecute = ActiveLayoutContent is DiagramEditorControl;
 		}
 
 		private void RefreshCompositionCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
 		{
-			var diagramEditor = (DiagramEditorControl)ActiveDockContent;
+			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
 			var composition = diagramEditor.Composition;
 
 			_strategiesRegistry.Reload(composition);
@@ -714,9 +662,14 @@ namespace StockSharp.Designer
 
 			settings.TryLoadSettings<SettingsStorage>("MarketDataSettingsCache", s => _marketDataSettingsCache.Load(s));
 			settings.TryLoadSettings<SettingsStorage>("EmulationSettings", s => _emulationSettings.Load(s));
-			settings.TryLoadSettings<SettingsStorage>("Layout", s => _layoutManager.Load(s));
 			settings.TryLoadSettings<SettingsStorage>("Connector", s => _connector.Load(s));
-			settings.TryLoadSettings<string>("ThemeName", s => ThemeManager.ApplicationThemeName = s);
+
+			ThemeManager.ApplicationThemeName = settings.GetValue("ThemeName", "Office2016Black");
+
+			var layout = settings.GetValue("Layout", Properties.Resources.DefaultAppLayout.LoadSettingsStorage());
+			_layoutManager.Load(layout);
+			
+			settings.TryLoadSettings<string>("Ribbon", s => Ribbon.LoadDevExpressControl(s));
 
 			settings.ResumeChangesMonitor();
 		}
@@ -737,6 +690,7 @@ namespace StockSharp.Designer
 		{
 			if (control == null)
 			{
+				RibbonSchemasTab.DataContext = null;
 				RibbonEmulationTab.DataContext = null;
 				RibbonLiveTab.DataContext = null;
 				RibbonDesignerTab.DataContext = null;
@@ -748,6 +702,7 @@ namespace StockSharp.Designer
 			control
 				.DoIf<object, DiagramEditorControl>(editor =>
 				{
+					RibbonSchemasTab.DataContext = null;
 					RibbonEmulationTab.DataContext = null;
 					RibbonLiveTab.DataContext = null;
 					RibbonDesignerTab.DataContext = editor.Composition;
@@ -757,6 +712,7 @@ namespace StockSharp.Designer
 			control
 				.DoIf<object, EmulationStrategyControl>(editor =>
 				{
+					RibbonSchemasTab.DataContext = null;
 					RibbonDesignerTab.DataContext = null;
 					RibbonLiveTab.DataContext = null;
 					RibbonEmulationTab.DataContext = editor;
@@ -766,10 +722,21 @@ namespace StockSharp.Designer
 			control
 				.DoIf<object, LiveStrategyControl>(editor =>
 				{
+					RibbonSchemasTab.DataContext = null;
 					RibbonEmulationTab.DataContext = null;
 					RibbonDesignerTab.DataContext = null;
 					RibbonLiveTab.DataContext = editor;
 					Ribbon.SelectedPage = RibbonLiveTab;
+				});
+
+			control
+				.DoIf<object, SolutionExplorerPanel>(editor =>
+				{
+					RibbonSchemasTab.DataContext = editor;
+					RibbonEmulationTab.DataContext = null;
+					RibbonLiveTab.DataContext = null;
+					RibbonDesignerTab.DataContext = null;
+					Ribbon.SelectedPage = RibbonSchemasTab;
 				});
 		}
 	}

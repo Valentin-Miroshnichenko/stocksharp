@@ -1641,7 +1641,7 @@
             <key>ControlType</key>
             <value>
               <Type type="string">string</Type>
-              <Value type="string">StockSharp.Designer.DiagramDebuggerControl, Designer</Value>
+              <Value type="string">StockSharp.Designer.DiagramDebuggerPanel, Designer</Value>
             </value>
           </KeyValuePairBeginStringAndObjectEnd>
           <KeyValuePairBeginStringAndObjectEnd>
