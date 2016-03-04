@@ -101,7 +101,8 @@ namespace StockSharp.Designer.Layout
 				MarkControlChanged(content);
 			}
 
-			DockingManager.ActiveLayoutItem = panel;
+			//DockingManager.ActiveLayoutItem = panel;
+			DockingManager.DockController.Activate(panel);
 		}
 
 		public void OpenDocumentWindow(IStudioControl content, bool canClose = true)
@@ -126,8 +127,10 @@ namespace StockSharp.Designer.Layout
 				MarkControlChanged(content);
 			}
 
-			DockingManager.ActiveLayoutItem = document;
-		}
+			//DockingManager.ActiveLayoutItem = document;
+
+			DockingManager.DockController.Activate(document);
+        }
 
 		public void CloseWindow(IStudioControl content)
 		{
