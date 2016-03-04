@@ -317,11 +317,6 @@ namespace StockSharp.Studio.Controls
 			return null;
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		private void OnLoaded()
 		{
 			SecurityPicker.SecurityProvider = ConfigManager.GetService<ISecurityProvider>();

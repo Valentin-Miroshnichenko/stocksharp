@@ -165,11 +165,6 @@ namespace StockSharp.Studio.Controls
 			Debugger.Load(_debuggerSettings);
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		#region IStudioControl
 
 		//TODO: дописать логику загрузки состояния для DockingManager

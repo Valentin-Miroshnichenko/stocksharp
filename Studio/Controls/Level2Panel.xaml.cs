@@ -109,11 +109,6 @@ namespace StockSharp.Studio.Controls
 			RaiseChangedCommand();
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		private void SecuritiesCtrlOnSelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
 			Settings.Security = ((SecurityGrid)sender).SelectedSecurity;

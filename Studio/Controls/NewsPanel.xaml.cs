@@ -76,11 +76,6 @@ namespace StockSharp.Studio.Controls
 			cmdSvc.Register<ResetedCommand>(this, false, cmd => NewsGrid.News.Clear());
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		public override void Save(SettingsStorage storage)
 		{
 			base.Save(storage);

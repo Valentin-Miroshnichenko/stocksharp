@@ -146,11 +146,6 @@ namespace StockSharp.Studio.Controls
 				.ForEach(s => _securityIds.Add(s.Id));
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		private void RaiseSelectedCommand()
 		{
 			new SelectCommand<Security>(SecurityPicker.SelectedSecurity, false).Process(this);

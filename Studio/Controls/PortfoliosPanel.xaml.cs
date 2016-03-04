@@ -69,11 +69,6 @@ namespace StockSharp.Studio.Controls
 			WhenLoaded(() => new RequestBindSource(this).SyncProcess(this));
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		public override void Save(SettingsStorage storage)
 		{
 			base.Save(storage);

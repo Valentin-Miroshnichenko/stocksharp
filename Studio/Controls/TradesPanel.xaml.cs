@@ -112,11 +112,6 @@ namespace StockSharp.Studio.Controls
 			});
 		}
 
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
-		}
-
 		private void RaiseSelectedCommand()
 		{
 			new SelectCommand<Trade>(TradesGrid.SelectedTrade, false).Process(this);

@@ -66,14 +66,10 @@ namespace StockSharp.Studio.Controls
 		private bool _isLoading;
 		private StudioStorageRegistry _storageRegistry;
 
-		public override string Key { get; set; }
-
 		public MarketDataPanel()
 		{
 			DataContext = this;
 			InitializeComponent();
-
-			Key = GetType().GUID.To<string>();
 
 			SelectedSettings = ConfigManager.GetService<MarketDataSettingsCache>().Settings.FirstOrDefault();
 			SecurityPicker.SecurityProvider = ConfigManager.GetService<ISecurityProvider>();
@@ -124,11 +120,6 @@ namespace StockSharp.Studio.Controls
 				return;
 
 			MarketDataGrid.BeginMakeEntries(_storageRegistry, SecurityPicker.SelectedSecurity, FormatCtrl.SelectedFormat, null);
-		}
-
-		private void RaiseChangedCommand()
-		{
-			new ControlChangedCommand(this).Process(this);
 		}
 
 		private void EditCommandExecuted(object sender, ExecutedRoutedEventArgs e)

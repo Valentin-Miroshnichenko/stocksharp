@@ -53,12 +53,13 @@ namespace StockSharp.Studio.Controls
 			set { SetValue(IconProperty, value); }
 		}
 
-		public virtual string Key {get; set;} = $"_{Guid.NewGuid().ToString("N")}";
+		public string Key { get; set; }
 
 		protected BaseStudioControl()
 		{
 			var type = GetType();
 
+			Key = $"_{type.GUID.ToString("N")}";
 			Title = type.GetDisplayName();
 			Icon = type.GetIconUrl();
 		}
