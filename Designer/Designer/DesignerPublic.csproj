@@ -41,6 +41,10 @@
     <ApplicationIcon>..\..\References\stocksharp.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Data.v15.2, Version=15.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\DevExpress\DevExpress.Data.v15.2.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.Xpf.Core.v15.2, Version=15.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\DevExpress\DevExpress.Xpf.Core.v15.2.dll</HintPath>
@@ -114,10 +118,6 @@
     <Reference Include="StockSharp.Xaml.Charting">
       <HintPath>..\..\Xaml.Charting\StockSharp.Xaml.Charting.dll</HintPath>
     </Reference>
-    <Reference Include="StockSharp.Xaml.Diagram, Version=4.3.14.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Xaml.Diagram\StockSharp.Xaml.Diagram.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
@@ -145,13 +145,16 @@
     </Compile>
     <Compile Include="AppConfig.cs" />
     <Compile Include="Commands\DebuggerCommands.cs" />
+    <Compile Include="Commands\OpenBacktestingCommand.cs" />
+    <Compile Include="Commands\CompositionCommands.cs" />
+    <Compile Include="Commands\OpenLiveCommand.cs" />
     <Compile Include="Commands\SetDefaultEmulationSettingsCommand.cs" />
     <Compile Include="CompositionItem.cs" />
     <Compile Include="Configuration\ControlElement.cs" />
     <Compile Include="Configuration\ControlElementCollection.cs" />
     <Compile Include="Configuration\DesignerSection.cs" />
-    <Compile Include="DiagramDebuggerControl.xaml.cs">
-      <DependentUpon>DiagramDebuggerControl.xaml</DependentUpon>
+    <Compile Include="DiagramDebuggerPanel.xaml.cs">
+      <DependentUpon>DiagramDebuggerPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="EmulationDiagramStrategy.cs" />
     <Compile Include="EmulationSettings.cs" />
@@ -167,23 +170,23 @@
       <DependentUpon>StrategyControlsGallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters.cs" />
-    <Compile Include="StrategyControl.xaml.cs">
-      <DependentUpon>StrategyControl.xaml</DependentUpon>
+    <Compile Include="StrategyPanel.xaml.cs">
+      <DependentUpon>StrategyPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SolutionExplorerControl.xaml.cs">
-      <DependentUpon>SolutionExplorerControl.xaml</DependentUpon>
+    <Compile Include="SolutionExplorerPanel.xaml.cs">
+      <DependentUpon>SolutionExplorerPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="StrategiesRegistry.cs" />
     <Compile Include="UserConfig.cs" />
-    <Page Include="DiagramDebuggerControl.xaml">
+    <Page Include="DiagramDebuggerPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DiagramEditorControl.xaml">
+    <Page Include="DiagramEditorPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="StrategyControl.xaml">
+    <Page Include="StrategyPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,15 +198,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DiagramEditorControl.xaml.cs">
-      <DependentUpon>DiagramEditorControl.xaml</DependentUpon>
+    <Compile Include="DiagramEditorPanel.xaml.cs">
+      <DependentUpon>DiagramEditorPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SolutionExplorerControl.xaml">
+    <Page Include="SolutionExplorerPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -238,6 +241,8 @@
     <Resource Include="Images\TreeStrategy_32x32.png" />
     <Resource Include="Images\bug_24x24.png" />
     <Resource Include="Layout\DefaultStrategyLayout.xml" />
+    <Resource Include="Images\Tree_32x32.png" />
+    <Resource Include="Layout\DefaultAppLayout.xml" />
     <Content Include="Themes.WPF.targets" />
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +285,10 @@
     <ProjectReference Include="..\..\Studio\Core\CorePublic.csproj">
       <Project>{23b15ae0-2021-43da-808f-3bf331462976}</Project>
       <Name>CorePublic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Xaml.Diagram\Xaml.DiagramPublic.csproj">
+      <Project>{e5d21a65-1b77-4b4b-87c7-8ac7eee4f085}</Project>
+      <Name>Xaml.DiagramPublic</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Xaml\Xaml.csproj">
       <Project>{64e4d6f0-36b6-4904-9ba7-fffbe5ff71d8}</Project>

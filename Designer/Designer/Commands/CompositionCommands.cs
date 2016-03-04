@@ -39,4 +39,43 @@
 			Element = element;
 		}
 	}
+
+	class SaveCompositionCommand : BaseStudioCommand
+	{
+		public CompositionItem Element { get; private set; }
+
+		public SaveCompositionCommand(CompositionItem element)
+		{
+			if (element == null)
+				throw new ArgumentNullException(nameof(element));
+
+			Element = element;
+		}
+	}
+
+	class DiscardCompositionCommand : BaseStudioCommand
+	{
+		public CompositionItem Element { get; private set; }
+
+		public DiscardCompositionCommand(CompositionItem element)
+		{
+			if (element == null)
+				throw new ArgumentNullException(nameof(element));
+
+			Element = element;
+		}
+	}
+
+	class RefreshCompositionCommand : BaseStudioCommand
+	{
+		public CompositionItem Element { get; private set; }
+
+		public RefreshCompositionCommand(CompositionItem element)
+		{
+			if (element == null)
+				throw new ArgumentNullException(nameof(element));
+
+			Element = element;
+		}
+	}
 }

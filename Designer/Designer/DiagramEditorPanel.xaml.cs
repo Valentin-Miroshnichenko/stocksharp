@@ -18,6 +18,7 @@ namespace StockSharp.Designer
 	using System;
 	using System.Linq;
 	using System.Windows;
+	using System.Windows.Input;
 
 	using Ecng.Collections;
 	using Ecng.Common;
@@ -25,25 +26,27 @@ namespace StockSharp.Designer
 	using Ecng.Serialization;
 	using Ecng.Xaml;
 
+	using StockSharp.Designer.Commands;
 	using StockSharp.Designer.Layout;
 	using StockSharp.Localization;
+	using StockSharp.Studio.Core.Commands;
 	using StockSharp.Xaml.Diagram;
 
-	public partial class DiagramEditorControl
+	public partial class DiagramEditorPanel
 	{
 		private readonly LayoutManager _layoutManager;
 
 		#region Composition property
 
 		public static readonly DependencyProperty CompositionProperty = DependencyProperty.Register(nameof(Composition),
-			typeof(CompositionItem), typeof(DiagramEditorControl), new PropertyMetadata(null, CompositionPropertyChanged));
+			typeof(CompositionItem), typeof(DiagramEditorPanel), new PropertyMetadata(null, CompositionPropertyChanged));
 
 		private static void CompositionPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
 		{
 			var oldComposition = (CompositionItem)args.OldValue;
 			var newComposition = (CompositionItem)args.NewValue;
 
-			((DiagramEditorControl)sender).CompositionPropertyChanged(oldComposition, newComposition);
+			((DiagramEditorPanel)sender).CompositionPropertyChanged(oldComposition, newComposition);
 		}
 
 		public CompositionItem Composition
@@ -54,6 +57,12 @@ namespace StockSharp.Designer
 
 		#endregion
 
+		public ICommand SaveCommand { get; private set; }
+		public ICommand DiscardCommand { get; private set; }
+		public ICommand RefreshCompositionCommand { get; private set; }
+		public ICommand EmulateStrategyCommand { get; private set; }
+		public ICommand ExecuteStrategyCommand { get; private set; }
+
 		public bool IsChanged { get; set; }
 
 		public INotifyList<DiagramElement> PaletteElements
@@ -62,9 +71,10 @@ namespace StockSharp.Designer
 			set { PaletteControl.PaletteElements = value; }
 		}
 
-		public DiagramEditorControl()
+		public DiagramEditorPanel()
 		{
-			InitializeComponent();
+			InitializeCommands();
+            InitializeComponent();
 
 			_layoutManager = new LayoutManager(DockingManager);
 
@@ -72,6 +82,59 @@ namespace StockSharp.Designer
 				DiagramEditor.IndicatorTypes.AddRange(StockSharp.Configuration.Extensions.GetIndicatorTypes());
 
 			PaletteElements = ConfigManager.GetService<StrategiesRegistry>().DiagramElements;
+		}
+
+		private void InitializeCommands()
+		{
+			SaveCommand = new DelegateCommand(
+				obj =>
+				{
+					new SaveCompositionCommand((CompositionItem)obj).SyncProcess(this);
+					ResetIsChanged();
+				},
+				obj => IsChanged);
+
+			DiscardCommand = new DelegateCommand(
+				obj =>
+				{
+					var composition = (CompositionItem)obj;
+
+                    new DiscardCompositionCommand(composition).SyncProcess(this);
+
+					Composition = null;
+					Composition = composition;
+
+					ResetIsChanged();
+				},
+				obj => IsChanged);
+
+			RefreshCompositionCommand = new DelegateCommand(
+				obj =>
+				{
+					var composition = (CompositionItem)obj;
+
+					new RefreshCompositionCommand(composition).SyncProcess(this);
+
+					Composition = null;
+					Composition = composition;
+				},
+				obj => true);
+
+			EmulateStrategyCommand = new DelegateCommand(
+				obj => new OpenBacktestingCommand((CompositionItem)obj).Process(this),
+				obj =>
+				{
+					var item = obj as CompositionItem;
+					return item != null && item.Type == CompositionType.Strategy;
+				});
+
+			ExecuteStrategyCommand = new DelegateCommand(
+				obj => new OpenLiveCommand((CompositionItem)obj).Process(this),
+				obj =>
+				{
+					var item = obj as CompositionItem;
+					return item != null && item.Type == CompositionType.Strategy;
+				});
 		}
 
 		public override bool CanClose()
@@ -122,7 +185,7 @@ namespace StockSharp.Designer
 
 			ConfigManager
 				.GetService<LayoutManager>()
-				.OpenDocumentWindow(new DiagramEditorControl
+				.OpenDocumentWindow(new DiagramEditorPanel
 				{
 					Composition = new CompositionItem(CompositionType.Composition, originalComposition)
 				});

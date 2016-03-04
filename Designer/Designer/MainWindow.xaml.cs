@@ -20,7 +20,6 @@ namespace StockSharp.Designer
 	using System.IO;
 	using System.Linq;
 	using System.Windows;
-	using System.Windows.Controls;
 	using System.Windows.Input;
 	using System.Windows.Media.Imaging;
 
@@ -55,10 +54,6 @@ namespace StockSharp.Designer
 
 	public partial class MainWindow
 	{
-		public static RoutedCommand SaveCommand = new RoutedCommand();
-		public static RoutedCommand DiscardCommand = new RoutedCommand();
-		public static RoutedCommand EmulateStrategyCommand = new RoutedCommand();
-		public static RoutedCommand ExecuteStrategyCommand = new RoutedCommand();
 		public static RoutedCommand ConnectorSettingsCommand = new RoutedCommand();
 		public static RoutedCommand ConnectDisconnectCommand = new RoutedCommand();
 		public static RoutedCommand RefreshCompositionCommand = new RoutedCommand();
@@ -256,7 +251,7 @@ namespace StockSharp.Designer
 
 				var control = _layoutManager
 					.DockingControls
-					.OfType<DiagramEditorControl>()
+					.OfType<DiagramEditorPanel>()
 					.FirstOrDefault(c => c.Key.CompareIgnoreCase(item.Key));
 
 				if (control != null)
@@ -267,7 +262,11 @@ namespace StockSharp.Designer
 
 				_strategiesRegistry.Remove(item);
 			});
-			
+
+			cmdSvc.Register<SaveCompositionCommand>(this, true, cmd => _strategiesRegistry.Save(cmd.Element));
+			cmdSvc.Register<DiscardCompositionCommand>(this, true, cmd => _strategiesRegistry.Discard(cmd.Element));
+			cmdSvc.Register<RefreshCompositionCommand>(this, true, cmd => _strategiesRegistry.Reload(cmd.Element));
+
 			cmdSvc.Register<RequestBindSource>(this, true, cmd => new BindConnectorCommand(ConfigManager.GetService<IConnector>(), cmd.Control).SyncProcess(this));
 		}
 
@@ -411,61 +410,6 @@ namespace StockSharp.Designer
 
 		#region Commands
 
-		private void SaveCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			var diagramEditor = ActiveLayoutContent as DiagramEditorControl;
-			e.CanExecute = diagramEditor != null && diagramEditor.IsChanged;
-		}
-
-		private void SaveCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
-			var item = diagramEditor.Composition;
-
-			_strategiesRegistry.Save(item);
-
-			diagramEditor.ResetIsChanged();
-		}
-
-		private void DiscardCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			var diagramEditor = ActiveLayoutContent as DiagramEditorControl;
-			e.CanExecute = diagramEditor != null && diagramEditor.IsChanged;
-		}
-
-		private void DiscardCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
-			var composition = diagramEditor.Composition;
-
-			_strategiesRegistry.Discard(composition);
-
-			diagramEditor.Composition = null;
-			diagramEditor.Composition = composition;
-		}
-
-		private void EmulateStrategyCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			var item = e.Parameter as CompositionItem;
-			e.CanExecute = item != null && item.Type == CompositionType.Strategy;
-		}
-
-		private void EmulateStrategyCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			OpenEmulation((CompositionItem)e.Parameter);
-		}
-
-		private void ExecuteStrategyCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			var item = e.Parameter as CompositionItem;
-			e.CanExecute = item != null && item.Type == CompositionType.Strategy;
-		}
-
-		private void ExecuteStrategyCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			OpenLive((CompositionItem)e.Parameter);
-		}
-
 		private void ConnectorSettingsCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = _connector.ConnectionState == ConnectionStates.Disconnected ||
@@ -518,22 +462,6 @@ namespace StockSharp.Designer
 			}
 			else
 				_connector.Disconnect();
-		}
-
-		private void RefreshCompositionCommand_OnCanExecute(object sender, CanExecuteRoutedEventArgs e)
-		{
-			e.CanExecute = ActiveLayoutContent is DiagramEditorControl;
-		}
-
-		private void RefreshCompositionCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
-		{
-			var diagramEditor = (DiagramEditorControl)ActiveLayoutContent;
-			var composition = diagramEditor.Composition;
-
-			_strategiesRegistry.Reload(composition);
-
-			diagramEditor.Composition = null;
-			diagramEditor.Composition = composition;
 		}
 
 		private void HelpCommand_OnExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -603,7 +531,7 @@ namespace StockSharp.Designer
 			if (item == null)
 				throw new ArgumentNullException(nameof(item));
 
-			var content = new DiagramEditorControl
+			var content = new DiagramEditorPanel
 			{
 				Composition = item
 			};
@@ -700,12 +628,12 @@ namespace StockSharp.Designer
 			}
 
 			control
-				.DoIf<object, DiagramEditorControl>(editor =>
+				.DoIf<object, DiagramEditorPanel>(editor =>
 				{
 					RibbonSchemasTab.DataContext = null;
 					RibbonEmulationTab.DataContext = null;
 					RibbonLiveTab.DataContext = null;
-					RibbonDesignerTab.DataContext = editor.Composition;
+					RibbonDesignerTab.DataContext = editor;
 					Ribbon.SelectedPage = RibbonDesignerTab;
 				});
 
