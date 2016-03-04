@@ -39,9 +39,41 @@ namespace StockSharp.Designer
 
 	public class StrategiesRegistry : BaseLogReceiver
 	{
+		sealed class InvariantCultureXmlSerializer
+		{
+			private readonly XmlSerializer<SettingsStorage> _serializer = new XmlSerializer<SettingsStorage>();
+
+			public void Serialize(SettingsStorage settings, string file)
+			{
+				if (settings == null)
+					throw new ArgumentNullException(nameof(settings));
+
+				if (file == null)
+					throw new ArgumentNullException(nameof(file));
+
+				CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Serialize(settings, file));
+			}
+
+			public SettingsStorage Deserialize(string file)
+			{
+				if (file == null)
+					throw new ArgumentNullException(nameof(file));
+
+				return CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(file));
+			}
+
+			public SettingsStorage Deserialize(Stream stream)
+			{
+				if (stream == null)
+					throw new ArgumentNullException(nameof(stream));
+
+				return CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(stream));
+			}
+		}
+
 		private readonly string _compositionsPath;
 		private readonly SynchronizedList<DiagramElement> _strategies = new SynchronizedList<DiagramElement>();
-		private readonly XmlSerializer<SettingsStorage> _serializer = new XmlSerializer<SettingsStorage>();
+		private readonly InvariantCultureXmlSerializer _serializer = new InvariantCultureXmlSerializer();
 
 		private readonly CompositionRegistry _compositionRegistry;
 		private readonly string _strategiesPath;
@@ -93,7 +125,7 @@ namespace StockSharp.Designer
 			var settings = _compositionRegistry.Serialize(element);
 			var file = Path.Combine(path, element.GetFileName());
 
-			CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Serialize(settings, file));
+			_serializer.Serialize(settings, file);
 		}
 
 		public void Remove(CompositionItem element)
@@ -132,7 +164,7 @@ namespace StockSharp.Designer
 
 			var path = isComposition ? _compositionsPath : _strategiesPath;
 			var file = Path.Combine(path, element.GetFileName());
-			var settings = CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(file));
+			var settings = _serializer.Deserialize(file);
 
 			_compositionRegistry.Load(element, settings);
 		}
@@ -175,7 +207,7 @@ namespace StockSharp.Designer
 			{
 				try
 				{
-					var settings = CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(file));
+					var settings = _serializer.Deserialize(file);
 					var element = _compositionRegistry.Deserialize(settings);
 
 					_compositionRegistry.DiagramElements.Add(element);
@@ -191,7 +223,7 @@ namespace StockSharp.Designer
 			{
 				try
 				{
-					var settings = CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(pair.Value.To<Stream>()));
+					var settings = _serializer.Deserialize(pair.Value.To<Stream>());
 					var element = _compositionRegistry.Deserialize(settings);
 
 					Save(element, true);
@@ -215,7 +247,7 @@ namespace StockSharp.Designer
 			{
 				try
 				{
-					var settings = CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(file));
+					var settings = _serializer.Deserialize(file);
 					var element = _compositionRegistry.Deserialize(settings);
 
 					_strategies.Add(element);
@@ -231,7 +263,7 @@ namespace StockSharp.Designer
 			{
 				try
 				{
-					var settings = CultureInfo.InvariantCulture.DoInCulture(() => _serializer.Deserialize(pair.Value.To<Stream>()));
+					var settings = _serializer.Deserialize(pair.Value.To<Stream>());
 					var element = _compositionRegistry.Deserialize(settings);
 
 					Save(element, false);
